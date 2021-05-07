@@ -1,0 +1,421 @@
+<!DOCTYPE html><html lang="zh-CN"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1"><meta name="format-detection" content="telephone=no"><meta name="apple-mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-status-bar-style" content="black"><link rel="icon" href="/favicon-16x16.png?v=2.6.2" type="image/png" sizes="16x16"><link rel="icon" href="/favicon-32x32.png?v=2.6.2" type="image/png" sizes="32x32"><meta name="description" content="Java第三次实训题：身份证号码验证及个人信息输出。需要定义一个CardID类，在这个类中定义cardIDNum，在main方法中调用setCardIDNum()时，调用输入方法输入身份证号到成员变量。此实验实现了对身份证号码的3重校验以及从身份证号码中提取出生日、年龄、性别等有效信息。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Java身份证验证CardID类">
+<meta property="og:url" content="http://taoyyz.github.io/2021/03/17/Java-CardID/index.html">
+<meta property="og:site_name" content="欢迎光临taoyyz的Blog">
+<meta property="og:description" content="Java第三次实训题：身份证号码验证及个人信息输出。需要定义一个CardID类，在这个类中定义cardIDNum，在main方法中调用setCardIDNum()时，调用输入方法输入身份证号到成员变量。此实验实现了对身份证号码的3重校验以及从身份证号码中提取出生日、年龄、性别等有效信息。">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="http://taoyyz.github.io/2021/03/17/Java-CardID/CardID01.png">
+<meta property="og:image" content="http://taoyyz.github.io/2021/03/17/Java-CardID/CardID02.png">
+<meta property="article:published_time" content="2021-03-16T16:20:00.000Z">
+<meta property="article:modified_time" content="2021-05-07T07:12:40.819Z">
+<meta property="article:author" content="taoyyz小陶">
+<meta property="article:tag" content="Java">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://taoyyz.github.io/2021/03/17/Java-CardID/CardID01.png"><title>Java身份证验证CardID类 | 欢迎光临taoyyz的Blog</title><link ref="canonical" href="http://taoyyz.github.io/2021/03/17/Java-CardID/"><link rel="dns-prefetch" href="https://cdn.jsdelivr.net"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5.12.1/css/all.min.css" type="text/css"><link rel="stylesheet" href="/css/index.css?v=2.6.2"><script>var Stun = window.Stun || {};
+var CONFIG = {
+  root: '/',
+  algolia: undefined,
+  assistSearch: undefined,
+  fontIcon: {"prompt":{"success":"fas fa-check-circle","info":"fas fa-arrow-circle-right","warning":"fas fa-exclamation-circle","error":"fas fa-times-circle"},"copyBtn":"fas fa-copy"},
+  sidebar: {"offsetTop":"20px","tocMaxDepth":6},
+  header: {"enable":true,"showOnPost":true,"scrollDownIcon":true},
+  postWidget: {"endText":true},
+  nightMode: {"enable":true},
+  back2top: {"enable":true},
+  codeblock: {"style":"carbon","highlight":"light","wordWrap":true},
+  reward: true,
+  fancybox: false,
+  zoomImage: {"gapAside":"20px"},
+  galleryWaterfall: undefined,
+  lazyload: true,
+  pjax: {"avoidBanner":false},
+  externalLink: {"icon":{"enable":true,"name":"fas fa-external-link-alt"}},
+  shortcuts: undefined,
+  prompt: {"copyButton":"复制","copySuccess":"复制成功","copyError":"复制失败"},
+  sourcePath: {"js":"js","css":"css","images":"images"},
+};
+
+window.CONFIG = CONFIG;</script><meta name="generator" content="Hexo 5.4.0"></head><body><div class="container" id="container"><header class="header" id="header"><div class="header-inner"><nav class="header-nav header-nav--fixed"><div class="header-nav-inner"><div class="header-nav-menubtn"><i class="fas fa-bars"></i></div><div class="header-nav-menu"><div class="header-nav-menu-item"><a class="header-nav-menu-item__link" href="/"><span class="header-nav-menu-item__icon"><i class="fas fa-home"></i></span><span class="header-nav-menu-item__text">首页</span></a></div><div class="header-nav-menu-item"><a class="header-nav-menu-item__link" href="/archives/"><span class="header-nav-menu-item__icon"><i class="fas fa-folder-open"></i></span><span class="header-nav-menu-item__text">归档</span></a></div><div class="header-nav-menu-item"><a class="header-nav-menu-item__link" href="/categories/"><span class="header-nav-menu-item__icon"><i class="fas fa-layer-group"></i></span><span class="header-nav-menu-item__text">分类</span></a></div><div class="header-nav-menu-item"><a class="header-nav-menu-item__link" href="/tags/"><span class="header-nav-menu-item__icon"><i class="fas fa-tags"></i></span><span class="header-nav-menu-item__text">标签</span></a></div><div class="header-nav-menu-item"><a class="header-nav-menu-item__link" href="/links/"><span class="header-nav-menu-item__icon"><i class="fas fa-link"></i></span><span class="header-nav-menu-item__text">资源和链接</span></a></div><div class="header-nav-menu-item"><a class="header-nav-menu-item__link" href="/about/"><span class="header-nav-menu-item__icon"><i class="far fa-address-card"></i></span><span class="header-nav-menu-item__text">关于</span></a></div></div><div class="header-nav-search"><span class="header-nav-search__icon"><i class="fas fa-search"></i></span><span class="header-nav-search__text">搜索</span></div><div class="header-nav-mode"><div class="mode"><div class="mode-track"><span class="mode-track-moon"></span><span class="mode-track-sun"></span></div><div class="mode-thumb"></div></div></div></div></nav><div class="header-banner"><div class="header-banner-info"><div class="header-banner-info__title">欢迎光临taoyyz的Blog</div><div class="header-banner-info__subtitle"></div></div><div class="header-banner-arrow"><div class="header-banner-arrow__icon"><i class="fas fa-angle-down"></i></div></div></div></div></header><main class="main" id="main"><div class="main-inner"><div class="content-wrap" id="content-wrap"><div class="content" id="content"><!-- Just used to judge whether it is an article page--><div id="is-post"></div><div class="post"><header class="post-header"><h1 class="post-title">Java身份证验证CardID类</h1><div class="post-meta"><span class="post-meta-item post-meta-item--createtime"><span class="post-meta-item__icon"><i class="far fa-calendar-plus"></i></span><span class="post-meta-item__info">发表于</span><span class="post-meta-item__value">2021-03-17</span></span><span class="post-meta-item post-meta-item--updatetime"><span class="post-meta-item__icon"><i class="far fa-calendar-check"></i></span><span class="post-meta-item__info">更新于</span><span class="post-meta-item__value">2021-05-07</span></span><span class="post-meta-item post-meta-item--wordcount"><span class="post-meta-item__icon"><i class="far fa-file-word"></i></span><span class="post-meta-item__info">字数统计</span><span class="post-meta-item__value">2.9k</span></span><span class="post-meta-item post-meta-item--readtime"><span class="post-meta-item__icon"><i class="far fa-clock"></i></span><span class="post-meta-item__info">阅读时长</span><span class="post-meta-item__value">22分</span></span></div></header><div class="post-body"><p><big><b><center><font color="red">=====taoyyz小陶©版权所有=====</font></center></b></big></p>
+<p><font size="6"><center>实验三 身份证号码验证及个人信息输出。</center></font></p>
+
+        <h1 id="要求：">
+          <a href="#要求：" class="heading-link"><i class="fas fa-link"></i></a><a href="#要求：" class="headerlink" title="要求："></a>要求：</h1>
+      <p>输入身份证号码，进行三重验证，并且输出对应信息。<br><font size="3"> 1、身份证验证主要包含：<br>&emsp;&emsp;1. 位数错误：正确应该为 18 位。<br>&emsp;&emsp;2. 字符错误：前面 17 个应该是数字，最后一位可以为‘X’或‘x’;<br>&emsp;&emsp;3. 校验码错误：<br>   &emsp;&emsp;&emsp;&emsp;身份证的最后一位为校验码，校验码是用于验证前面的数字是否有错误，校<br>   验码运算规则：<br>   &emsp;&emsp;&emsp;&emsp;（1）先将最后一位设定为 0。<br>   &emsp;&emsp;&emsp;&emsp;（2）效验码的计算公式为：(Σ (ai×wi))%11<br>    &emsp;&emsp;其中：i 是从右向左的包括效验码在内的序号（1－18）<br>    &emsp;&emsp;ai 是第 i 位的数字<br>    &emsp;&emsp;wi 是第 i 位上的加权因子，其数值依据公式 wi=(2(i-1))%11，（计算 ab：函数为：java.lang.Math.pow(a,b)） i，ai，wi 的对应关系如下：</font></p>
+<figure class="highlight plaintext"><div class="table-container"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">身份证号码： 5  1  0  1  0  1  1  9  8  8 0 8 0 8 0 1 2 0</span><br><span class="line">    i    ：18 17 16 15 14 13 12 11 10 9 8 7 6 5 4 3 2 1</span><br><span class="line">    wi   ： 用公式计算 2^(i-1)%11 …… 9 10 5 8 4 2 1</span><br></pre></td></tr></table></div></figure>
+<p>&emsp;&emsp;&emsp;&emsp;（3）求出(Σ (ai×wi))%11 之后依据下表得到效验码：</p>
+<figure class="highlight plaintext"><div class="table-container"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">(Σ (ai×wi))%11 :0 1 2 3 4 5 6 7 8 9 10</span><br><span class="line">        校验码值:1 0 X 9 8  7 6 5 4 3 2</span><br></pre></td></tr></table></div></figure>
+<p>&emsp;&emsp;&emsp;&emsp;（4）计算 ab：函数为：java.lang.Math.pow(a,b)<br>2、个人信息输出主要包含：<br>&emsp;&emsp;1: 生日：如 1985 年 5 月 9 日。<br>&emsp;&emsp;2: 年龄：如 20 岁，应当精确到日；<br>&emsp;&emsp;3: 性别：顺序码的计数为，男性以奇数计数，女性以偶数计数<br><font size="2">&emsp;&emsp;&emsp;&emsp;（1）编写一个身份证类，包含一个属性：身份证号；三个验证函数；一个信息输出函数。<br>&emsp;&emsp;&emsp;&emsp;（2）编写一个测试类，可从键盘上输入一个身份证号码，产生一个身份证对象，然后调用其相关方法对身份证号码进行验证，没有通过验证的话，提示错<br>误信息并让用户重新输入，如果通过验证，则输出该人的信息。<br>代码框架如下：</font></p>
+<figure class="highlight plaintext"><div class="table-container"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line">class CardID&#123;</span><br><span class="line">    private String cardNum; </span><br><span class="line">    public void setCardNum(String cardNum)&#123;//换一个号码</span><br><span class="line">        this. cardNum= cardNum; &#125;</span><br><span class="line">    public boolean lengthVerify()&#123;○1 位数错误验证</span><br><span class="line">    &#125;</span><br><span class="line">    public boolean charVerify()&#123;○2 字符错误验证</span><br><span class="line">    &#125;</span><br><span class="line">    public boolean checkcodeVerify()&#123;○3 校验码错误验证</span><br><span class="line">    //测试时请将每一轮的 i,ai,wi,sum 输出，避免出错，成功后不再输出</span><br><span class="line">    &#125;</span><br><span class="line">    public void output()&#123;○4 信息输出</span><br><span class="line">    //按要求输出个人信息</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line">class CardIDDemo&#123;</span><br><span class="line">    public static void main(String []args)&#123;</span><br><span class="line">    //用死循环反复测试输入、验证、输出</span><br><span class="line">    //注意第一步验证失败不能进入第二步，第二步失败不能进入第三步，所有验</span><br><span class="line">    证通过才能进行输出。</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></div></figure>
+
+
+
+        <h1 id="思路：">
+          <a href="#思路：" class="heading-link"><i class="fas fa-link"></i></a><a href="#思路：" class="headerlink" title="思路："></a>思路：</h1>
+      <figure class="highlight plaintext"><div class="table-container"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">两个类：Card类和CardID类</span><br><span class="line">其中:1.在Card类中定义String类型的cardNum变量</span><br><span class="line">	2.在Card类中定义Getter/Setter方法</span><br><span class="line">	3.在Card类中定义3种验证方法：</span><br><span class="line">		3.1对于位数验证，直接判断输入的cardNum长度是否为18</span><br><span class="line">		3.2对于字符验证，前17位为数字，最后一位还可以为大小写的&#x27;x&#x27;</span><br><span class="line">		3.3对于校验码，需要取出每一位，转化为整形进行算术运算</span><br><span class="line">	4.在output()输出方法中，输出生日、年龄、性别</span><br><span class="line">	5.以上3种输出需求均在身份证号码中截取获得</span><br><span class="line">	6.利用Calendar类不是必须的，但是逻辑清晰，有利于日期计算</span><br><span class="line">	7.年龄判断不是简单的相减，需要考虑到月份和天数不够减情况下的处理</span><br></pre></td></tr></table></div></figure>
+
+        <h1 id="代码：">
+          <a href="#代码：" class="heading-link"><i class="fas fa-link"></i></a><a href="#代码：" class="headerlink" title="代码："></a>代码：</h1>
+      <figure class="highlight c"><figcaption><span>CardID类：</span></figcaption><div class="table-container"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br><span class="line">128</span><br><span class="line">129</span><br><span class="line">130</span><br><span class="line">131</span><br><span class="line">132</span><br><span class="line">133</span><br><span class="line">134</span><br><span class="line">135</span><br><span class="line">136</span><br><span class="line">137</span><br><span class="line">138</span><br><span class="line">139</span><br><span class="line">140</span><br><span class="line">141</span><br><span class="line">142</span><br><span class="line">143</span><br><span class="line">144</span><br><span class="line">145</span><br><span class="line">146</span><br><span class="line">147</span><br><span class="line">148</span><br><span class="line">149</span><br><span class="line">150</span><br><span class="line">151</span><br><span class="line">152</span><br><span class="line">153</span><br><span class="line">154</span><br><span class="line">155</span><br><span class="line">156</span><br><span class="line">157</span><br><span class="line">158</span><br><span class="line">159</span><br><span class="line">160</span><br><span class="line">161</span><br><span class="line">162</span><br><span class="line">163</span><br><span class="line">164</span><br><span class="line">165</span><br><span class="line">166</span><br><span class="line">167</span><br><span class="line">168</span><br><span class="line">169</span><br><span class="line">170</span><br><span class="line">171</span><br><span class="line">172</span><br><span class="line">173</span><br><span class="line">174</span><br><span class="line">175</span><br><span class="line">176</span><br></pre></td><td class="code"><pre><span class="line">package com.experiment.exp3;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> java.text.SimpleDateFormat;</span><br><span class="line"><span class="keyword">import</span> java.util.Calendar;</span><br><span class="line"><span class="keyword">import</span> java.util.Objects;</span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * @Author taoyyz(陶俊杰)</span></span><br><span class="line"><span class="comment"> * @Date 2021/3/3 15:25</span></span><br><span class="line"><span class="comment"> * @Version 1.0</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">CardID</span> &#123;</span></span><br><span class="line">    <span class="keyword">private</span> String cardNum;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">setCardNum</span><span class="params">(String cardNum)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">this</span>.cardNum = cardNum;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">//位数错误验证 （是否为18位）</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> boolean <span class="title">lengthVerify</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">if</span> (<span class="keyword">this</span>.cardNum.length() == <span class="number">18</span>) &#123;</span><br><span class="line">            <span class="keyword">return</span> <span class="literal">true</span>;</span><br><span class="line">        &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">            System.out.print(<span class="string">&quot;位数验证错误！&quot;</span>);</span><br><span class="line">            <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">//字符错误验证（前17位为数字，最后一位为&#x27;X&#x27;或&#x27;x&#x27;）</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> boolean <span class="title">charVerify</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">char</span>[] chars = <span class="keyword">this</span>.cardNum.toCharArray();</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; chars.length - <span class="number">1</span>; i++) &#123;</span><br><span class="line">            <span class="keyword">if</span> (!(<span class="string">&#x27;0&#x27;</span> &lt;= chars[i] &amp;&amp; chars[i] &lt;= <span class="string">&#x27;9&#x27;</span>)) &#123;</span><br><span class="line">                System.out.print(<span class="string">&quot;字符验证错误！&quot;</span>);</span><br><span class="line">                <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">if</span> ((<span class="string">&#x27;0&#x27;</span> &lt;= chars[<span class="number">17</span>] &amp;&amp; chars[<span class="number">17</span>] &lt;= <span class="string">&#x27;9&#x27;</span>) || chars[<span class="number">17</span>] == <span class="string">&#x27;x&#x27;</span> || chars[<span class="number">17</span>] == <span class="string">&#x27;X&#x27;</span>) &#123;</span><br><span class="line">            <span class="keyword">return</span> <span class="literal">true</span>;</span><br><span class="line">        &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">            System.out.print(<span class="string">&quot;字符验证错误！&quot;</span>);</span><br><span class="line">            <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">//校验码错误验证 （最后一位）</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> boolean <span class="title">checkCodeVerify</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="comment">//先把输入的字符串类型身份证号转为字符串数组</span></span><br><span class="line">        String[] cardNumStr = numStringToArray();</span><br><span class="line">        <span class="comment">//定义整型数组ai，以存放身份证号每一位的整型值，方便算术运算</span></span><br><span class="line">        <span class="keyword">int</span>[] ai = <span class="keyword">new</span> <span class="keyword">int</span>[<span class="number">18</span>];</span><br><span class="line">        <span class="comment">//先把最后一位设定为0</span></span><br><span class="line">        ai[ai.length - <span class="number">1</span>] = <span class="number">0</span>;</span><br><span class="line">        <span class="comment">//把身份证号除最后一位外，依次存入整型数组ai中（因为最后一位可能为字符&#x27;x&#x27;或&#x27;X&#x27;）</span></span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; cardNumStr.length - <span class="number">1</span>; i++) &#123;</span><br><span class="line">            ai[i] = Integer.parseInt(cardNumStr[i]);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">int</span>[] wi = <span class="keyword">new</span> <span class="keyword">int</span>[<span class="number">18</span>];</span><br><span class="line">        <span class="comment">//计算wi[]数组每一位</span></span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = ai.length; i &gt; <span class="number">0</span>; i--) &#123;</span><br><span class="line">            wi[<span class="number">18</span> - i] = (<span class="keyword">int</span>) Math.<span class="built_in">pow</span>(<span class="number">2</span>, (i - <span class="number">1</span>)) % <span class="number">11</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="comment">//计算校验码 verifyCode = (∑(ai x wi))%11</span></span><br><span class="line">        <span class="keyword">int</span> result = <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; ai.length; i++) &#123;</span><br><span class="line">            result += ai[i] * wi[i];</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">int</span> verifyCode = result % <span class="number">11</span>;</span><br><span class="line">        <span class="comment">//定义一个字符串数组，存储每一位校验码应该对应的校验码值</span></span><br><span class="line">        String[] verifyCodeList = &#123;<span class="string">&quot;1&quot;</span>, <span class="string">&quot;0&quot;</span>, <span class="string">&quot;X&quot;</span>, <span class="string">&quot;9&quot;</span>, <span class="string">&quot;8&quot;</span>, <span class="string">&quot;7&quot;</span>, <span class="string">&quot;6&quot;</span>, <span class="string">&quot;5&quot;</span>, <span class="string">&quot;4&quot;</span>, <span class="string">&quot;3&quot;</span>, <span class="string">&quot;2&quot;</span>&#125;;</span><br><span class="line">        <span class="comment">//判断校验码是否正确</span></span><br><span class="line">        String lastChar = verifyCodeList[verifyCode];</span><br><span class="line">        System.out.println(<span class="string">&quot;身份证最后一位应该是&quot;</span> + <span class="string">&quot;&#x27;&quot;</span> + lastChar + <span class="string">&quot;&#x27;&quot;</span>);</span><br><span class="line">        <span class="comment">//注意在判断时，校验码数组只有大写的&#x27;X&#x27;，用户输入的可能为小写，会导致误判。应该都转为小写/大写再判断</span></span><br><span class="line">        <span class="keyword">if</span> (Objects.equals(cardNumStr[cardNumStr.length - <span class="number">1</span>].toLowerCase(), lastChar.toLowerCase())) &#123;</span><br><span class="line">            <span class="keyword">return</span> <span class="literal">true</span>;</span><br><span class="line">        &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">            System.out.println(<span class="string">&quot;校验码验证错误！&quot;</span>);</span><br><span class="line">            <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">//信息输出</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">output</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="comment">/*</span></span><br><span class="line"><span class="comment">            生日 第7位到第10位年 第11位到第12位月 第13位到第14位日    yyyy年M月d日</span></span><br><span class="line"><span class="comment">            年龄 今天 - 生日    精确到日</span></span><br><span class="line"><span class="comment">            性别 第15到17位    奇数男 偶数女</span></span><br><span class="line"><span class="comment">        */</span></span><br><span class="line">        <span class="comment">/*调用相应的方法计算生日、年龄、性别*/</span></span><br><span class="line"><span class="comment">//        生日</span></span><br><span class="line">        <span class="comment">//格式化Calendar类的生日为指定格式</span></span><br><span class="line">        Calendar birthDate = calcBirth();</span><br><span class="line">        SimpleDateFormat sdf = <span class="keyword">new</span> SimpleDateFormat(<span class="string">&quot;yyyy年M月d日&quot;</span>);   <span class="comment">//格式化时间成字符串</span></span><br><span class="line">        String birth = sdf.format(birthDate.getTime());</span><br><span class="line"><span class="comment">//        年龄</span></span><br><span class="line">        String age = calcAge(birthDate);</span><br><span class="line"><span class="comment">//        性别</span></span><br><span class="line">        String sex = calcSex();</span><br><span class="line"></span><br><span class="line">        <span class="comment">//输出计算出的生日、年龄、性别</span></span><br><span class="line">        System.out.println(<span class="string">&quot;生日：&quot;</span> + birth);</span><br><span class="line">        System.out.println(<span class="string">&quot;年龄：&quot;</span> + age);</span><br><span class="line">        System.out.println(<span class="string">&quot;性别：&quot;</span> + sex);</span><br><span class="line">        System.out.println(<span class="string">&quot;===========&quot;</span>);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">//计算性别</span></span><br><span class="line">    <span class="function"><span class="keyword">private</span> String <span class="title">calcSex</span><span class="params">()</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">int</span> numOfSex = Integer.parseInt(<span class="keyword">this</span>.cardNum.substring(<span class="number">14</span>, <span class="number">17</span>));</span><br><span class="line">        <span class="keyword">return</span> numOfSex % <span class="number">2</span> != <span class="number">0</span> ? <span class="string">&quot;男&quot;</span> : <span class="string">&quot;女&quot;</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">//计算年龄</span></span><br><span class="line">    <span class="function"><span class="keyword">private</span> String <span class="title">calcAge</span><span class="params">(Calendar birthDateString)</span> </span>&#123;</span><br><span class="line">        <span class="comment">//解析生日到单独的变量中</span></span><br><span class="line">        <span class="keyword">int</span> yearOfBirth = birthDateString.get(Calendar.YEAR);</span><br><span class="line">        <span class="keyword">int</span> monthOfBirth = birthDateString.get(Calendar.MONTH) + <span class="number">1</span>;</span><br><span class="line">        <span class="keyword">int</span> dayOfBirth = birthDateString.get(Calendar.DATE);</span><br><span class="line">        <span class="comment">//获取今天的日期到单独变量中</span></span><br><span class="line">        Calendar nowDate = Calendar.getInstance();</span><br><span class="line">        <span class="keyword">int</span> yearOfNow = nowDate.get(Calendar.YEAR);</span><br><span class="line">        <span class="keyword">int</span> monthOfNow = nowDate.get(Calendar.MONTH) + <span class="number">1</span>;</span><br><span class="line">        <span class="keyword">int</span> dayOfNow = nowDate.get(Calendar.DATE);</span><br><span class="line">        <span class="comment">//计算年份差</span></span><br><span class="line">        <span class="keyword">int</span> ageOfYear = yearOfNow - yearOfBirth;</span><br><span class="line">        <span class="comment">//计算月份差</span></span><br><span class="line">        <span class="keyword">int</span> ageOfMonth = monthOfNow - monthOfBirth;</span><br><span class="line">        <span class="keyword">if</span> (ageOfMonth &lt; <span class="number">0</span>) &#123;    <span class="comment">//今年的月份比出生月份小</span></span><br><span class="line">            ageOfYear--;         <span class="comment">//年龄 - 1</span></span><br><span class="line">            ageOfMonth += <span class="number">12</span>;    <span class="comment">//月份补12个月</span></span><br><span class="line">        &#125;</span><br><span class="line">        <span class="comment">//计算天数差</span></span><br><span class="line">        <span class="keyword">int</span> ageOfDay = dayOfNow - dayOfBirth;</span><br><span class="line">        <span class="keyword">if</span> (ageOfDay &lt; <span class="number">0</span>) &#123;     <span class="comment">//天数比生日天数小</span></span><br><span class="line">            ageOfMonth--;       <span class="comment">//月份 - 1</span></span><br><span class="line">            ageOfDay += nowDate.getActualMaximum(Calendar.DAY_OF_MONTH) + <span class="number">1</span>; <span class="comment">//天数补齐一个月</span></span><br><span class="line">            <span class="comment">/*这里有个小争议：如果活了某个月的最大天数，也可以算作活了这个月的下个月的第0天</span></span><br><span class="line"><span class="comment">            对于某人的生日来说，+1 操作相当于把今天看做为新的一岁的第0天，而不是活了11月30天(因为活了12个月相当于就是下一年了)</span></span><br><span class="line"><span class="comment">            加不加1就看怎么理解今天作为生日的话，到底是把今天算作这一岁的最后一天还是下一岁新的一天*/</span></span><br><span class="line">        &#125;</span><br><span class="line">        <span class="comment">//再次修正月份以及年份</span></span><br><span class="line">        <span class="keyword">if</span> (ageOfMonth &lt; <span class="number">0</span>) &#123;   <span class="comment">//上一步计算天数时，可能导致原本0月自减1变成-1</span></span><br><span class="line">            ageOfYear--;        <span class="comment">//修正岁数 - 1</span></span><br><span class="line">            ageOfMonth += <span class="number">12</span>;   <span class="comment">//月份补12个月</span></span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> ageOfYear + <span class="string">&quot;岁&quot;</span> + ageOfMonth + <span class="string">&quot;月&quot;</span> + ageOfDay + <span class="string">&quot;天&quot;</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">//计算生日</span></span><br><span class="line">    <span class="function"><span class="keyword">private</span> Calendar <span class="title">calcBirth</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="comment">//从输入的身份证号获取相应位置的字符串，转换成整数型</span></span><br><span class="line">        <span class="keyword">int</span> year = Integer.parseInt(<span class="keyword">this</span>.cardNum.substring(<span class="number">6</span>, <span class="number">10</span>));   <span class="comment">//注意substring()下标[begin,end)</span></span><br><span class="line">        <span class="keyword">int</span> month = Integer.parseInt(<span class="keyword">this</span>.cardNum.substring(<span class="number">10</span>, <span class="number">12</span>));</span><br><span class="line">        <span class="keyword">int</span> day = Integer.parseInt(<span class="keyword">this</span>.cardNum.substring(<span class="number">12</span>, <span class="number">14</span>));</span><br><span class="line">        Calendar birthDate = Calendar.getInstance();</span><br><span class="line">        <span class="comment">//把Calendar类的birthDate设置为获取到的整数型的年、月、日</span></span><br><span class="line">        birthDate.<span class="built_in">set</span>(Calendar.YEAR, year);</span><br><span class="line">        birthDate.<span class="built_in">set</span>(Calendar.MONTH, month - <span class="number">1</span>);   <span class="comment">//Calendar类月份从0到11月，实际上的8月只是MONTH的7月</span></span><br><span class="line">        birthDate.<span class="built_in">set</span>(Calendar.DATE, day);</span><br><span class="line">        <span class="comment">//把计算出来的birthDate作为Calendar类返回值带回</span></span><br><span class="line">        <span class="keyword">return</span> birthDate;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">//把输入的身份证字符串转化为字符串数组</span></span><br><span class="line">    <span class="keyword">private</span> String[] numStringToArray() &#123;</span><br><span class="line">        <span class="keyword">char</span>[] chars = <span class="keyword">this</span>.cardNum.toCharArray();</span><br><span class="line">        String[] numArray = <span class="keyword">new</span> String[cardNum.length()];</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; cardNum.length(); i++) &#123;</span><br><span class="line">            numArray[i] = String.valueOf(chars[i]);   <span class="comment">//身份证号每一位的字符顺序存入int数组</span></span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> numArray;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></div></figure>
+
+<figure class="highlight c"><figcaption><span>CardIDDemo类(含main方法)：</span></figcaption><div class="table-container"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br></pre></td><td class="code"><pre><span class="line">package com.experiment.exp3;</span><br><span class="line"><span class="comment">/*</span></span><br><span class="line"><span class="comment">    （1）编写一个身份证类，包含一个属性：身份证号；三个验证函数；一个</span></span><br><span class="line"><span class="comment">    信息输出函数。</span></span><br><span class="line"><span class="comment">    （2）编写一个测试类，可从键盘上输入一个身份证号码，产生一个身份证</span></span><br><span class="line"><span class="comment">    对象，然后调用其相关方法对身份证号码进行验证，没有通过验证的话，提示错</span></span><br><span class="line"><span class="comment">    误信息并让用户重新输入，如果通过验证，则输出该人的信息。</span></span><br><span class="line"><span class="comment">    1。用死循环反复测试输入、验证、输出</span></span><br><span class="line"><span class="comment">    2。注意第一步验证失败不能进入第二步，第二步失败不能进入第三步，所有验证通过才能进行输出。</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> java.util.Scanner;</span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * @Author taoyyz(陶俊杰)</span></span><br><span class="line"><span class="comment"> * @Date 2021/3/3 15:31</span></span><br><span class="line"><span class="comment"> * @Version 1.0</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">CardIDDemo</span> &#123;</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">        Scanner sc = <span class="keyword">new</span> Scanner(System.in);</span><br><span class="line">        <span class="keyword">while</span> (<span class="literal">true</span>) &#123;</span><br><span class="line">            System.out.println(<span class="string">&quot;请输入一个身份证号：&quot;</span>);</span><br><span class="line">            String cardId = sc.next();      <span class="comment">//键盘输入一个身份证号码</span></span><br><span class="line">            CardID cardID = <span class="keyword">new</span> CardID();   <span class="comment">//产生一个身份证对象</span></span><br><span class="line">            <span class="comment">//开始验证</span></span><br><span class="line">            cardID.setCardNum(cardId);</span><br><span class="line">            <span class="keyword">if</span> (cardID.lengthVerify()) &#123;    <span class="comment">//位数错误验证</span></span><br><span class="line">                <span class="keyword">if</span> (cardID.charVerify()) &#123;  <span class="comment">//字符错误验证</span></span><br><span class="line">                    <span class="keyword">if</span> (cardID.checkCodeVerify()) &#123; <span class="comment">//校验码错误验证</span></span><br><span class="line">                        System.out.println(<span class="string">&quot;验证通过&quot;</span>);</span><br><span class="line">                        cardID.output();</span><br><span class="line">                    &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">                        error();</span><br><span class="line">                    &#125;</span><br><span class="line">                &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">                    error();</span><br><span class="line">                &#125;</span><br><span class="line">            &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">                error();</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">error</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        System.out.println(<span class="string">&quot;验证错误，请重新输入&quot;</span>);</span><br><span class="line">        System.out.println(<span class="string">&quot;-----------&quot;</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></div></figure>
+
+
+        <h1 id="运行截图：">
+          <a href="#运行截图：" class="heading-link"><i class="fas fa-link"></i></a><a href="#运行截图：" class="headerlink" title="运行截图："></a>运行截图：</h1>
+      <p>
+        <img class="lazyload lazyload-gif" src="/images/loading.svg" data-src="CardID01.png" alt="CardID01">
+      
+        <img class="lazyload lazyload-gif" src="/images/loading.svg" data-src="CardID02.png" alt="CardID02">
+      </p>
+
+        <h1 id="心得：">
+          <a href="#心得：" class="heading-link"><i class="fas fa-link"></i></a><a href="#心得：" class="headerlink" title="心得："></a>心得：</h1>
+      <p><font size="3">这个CardID类想要写到完美无BUG是有一定的难度的，特别是在年龄计算那一块，精确到年很简单，属于有手就行。<br>精确到月也只是多一步判断，就是当前月份-出生月份为负数时，说明当前月份比出生月份小，那么年龄就要-1，然后修正月份，也就是月份+=12。<br>天数的处理跟上一步类似。要注意天数相减为负数时导致月份-1，这时候还需要再次判断月份是否为负。否则会导致原本0月，经过天数不够减之后，月份成为负1月。</font></p>
+
+
+<center><font size="4">感谢阅读💗</font></center></div><footer class="post-footer"><div class="post-ending ending"><div class="ending__text">------ 本文结束，感谢您的阅读 ------</div></div><div class="post-tags"><span class="post-tags-item"><span class="post-tags-item__icon"><i class="fas fa-tag"></i></span><a class="post-tags-item__link" href="http://taoyyz.github.io/tags/Java/">Java</a></span></div><div class="post-reward reward"><div class="reward-button">看的开心的话可以请我喝杯奶茶~</div><div class="reward-qrcode"><span class="reward-qrcode-alipay"><img class="reward-qrcode-alipay__img" src="/images/zfb.jpg"><div class="reward-qrcode-alipay__text">支付宝</div></span><span class="reward-qrcode-wechat"><img class="reward-qrcode-wechat__img" src="/images/vx.jpg"><div class="reward-qrcode-wechat__text">微信</div></span></div></div><nav class="post-paginator paginator"><div class="paginator-prev"><a class="paginator-prev__link" href="/2021/05/01/Java-Swing/"><span class="paginator-prev__icon"><i class="fas fa-angle-left"></i></span><span class="paginator-prev__text">Java-swing图形化——小小留言板</span></a></div><div class="paginator-next"><a class="paginator-next__link" href="/2021/03/15/Java-Complex/"><span class="paginator-prev__text">Java复数Complex类</span><span class="paginator-next__icon"><i class="fas fa-angle-right"></i></span></a></div></nav></footer></div></div></div><div class="sidebar-wrap" id="sidebar-wrap"><aside class="sidebar" id="sidebar"><div class="sidebar-nav"><span class="sidebar-nav-toc current">文章目录</span><span class="sidebar-nav-ov">站点概览</span></div><section class="sidebar-toc"><ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#%E8%A6%81%E6%B1%82%EF%BC%9A"><span class="toc-number">1.</span> <span class="toc-text">
+          要求：</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E6%80%9D%E8%B7%AF%EF%BC%9A"><span class="toc-number">2.</span> <span class="toc-text">
+          思路：</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E4%BB%A3%E7%A0%81%EF%BC%9A"><span class="toc-number">3.</span> <span class="toc-text">
+          代码：</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E8%BF%90%E8%A1%8C%E6%88%AA%E5%9B%BE%EF%BC%9A"><span class="toc-number">4.</span> <span class="toc-text">
+          运行截图：</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%BF%83%E5%BE%97%EF%BC%9A"><span class="toc-number">5.</span> <span class="toc-text">
+          心得：</span></a></li></ol></section><!-- ov = overview--><section class="sidebar-ov hide"><div class="sidebar-ov-author"><div class="sidebar-ov-author__avatar"><img class="sidebar-ov-author__avatar_img" src="/images/icons/head.jpg" alt="avatar"></div><p class="sidebar-ov-author__text">taoyyz</p></div><div class="sidebar-ov-social"><a class="sidebar-ov-social-item" href="https://weibo.com/SBTTGP/" target="_blank" rel="noopener" data-popover="微博" data-popover-pos="up"><span class="sidebar-ov-social-item__icon"><i class="fab fa-weibo"></i></span></a><a class="sidebar-ov-social-item" href="https://www.zhihu.com/people/taoyyz" target="_blank" rel="noopener" data-popover="知乎" data-popover-pos="up"><span class="sidebar-ov-social-item__icon">知</span></a><a class="sidebar-ov-social-item" href="https://space.bilibili.com/10111280" target="_blank" rel="noopener" data-popover="哔哩哔哩" data-popover-pos="up"><span class="sidebar-ov-social-item__icon"><i class="fas fa-tv"></i></span></a><a class="sidebar-ov-social-item" href="angelahape" target="_blank" rel="noopener" data-popover="微信" data-popover-pos="up"><span class="sidebar-ov-social-item__icon"><i class="fab fa-weixin"></i></span></a><a class="sidebar-ov-social-item" href="tencent://message?uin=2655026691" target="_blank" rel="noopener" data-popover="QQ" data-popover-pos="up"><span class="sidebar-ov-social-item__icon"><i class="fab fa-qq"></i></span></a><a class="sidebar-ov-social-item" href="https://www.youtube.com/channel/UCsz2-9ReY8ayMd-92rEGKFQ" target="_blank" rel="noopener" data-popover="Youtube" data-popover-pos="up"><span class="sidebar-ov-social-item__icon"><i class="fab fa-youtube"></i></span></a></div><div class="sidebar-ov-state"><a class="sidebar-ov-state-item sidebar-ov-state-item--posts" href="/archives/"><div class="sidebar-ov-state-item__count">6</div><div class="sidebar-ov-state-item__name">归档</div></a><a class="sidebar-ov-state-item sidebar-ov-state-item--categories" href="/categories/"><div class="sidebar-ov-state-item__count">1</div><div class="sidebar-ov-state-item__name">分类</div></a><a class="sidebar-ov-state-item sidebar-ov-state-item--tags" href="/tags/"><div class="sidebar-ov-state-item__count">1</div><div class="sidebar-ov-state-item__name">标签</div></a></div></section><div class="sidebar-reading"><div class="sidebar-reading-info"><span class="sidebar-reading-info__text">你已阅读了 </span><span class="sidebar-reading-info__num">0</span><span class="sidebar-reading-info__perc">%</span></div><div class="sidebar-reading-line"></div></div></aside></div><div class="clearfix"></div></div></main><footer class="footer" id="footer"><div class="footer-inner"><div><span>Copyright © 2021</span><span class="footer__icon"><i class="fas fa-heart"></i></span><span>taoyyz小陶</span></div><div>基于Hexo-stun，taoyyz所有</div></div></footer><div class="loading-bar" id="loading-bar"><div class="loading-bar__progress"></div></div><div class="back2top" id="back2top"><span class="back2top__icon"><i class="fas fa-rocket"></i></span></div></div><div class="search-mask"></div><div class="search-popup"><span class="search-close"></span><div class="search-input"><input placeholder="搜索文章（支持多关键词，请用空格分隔）"></div><div class="search-results"></div></div><script src="https://cdn.jsdelivr.net/npm/jquery@v3.4.1/dist/jquery.min.js"></script><script src="https://cdn.jsdelivr.net/npm/velocity-animate@1.5.2/velocity.min.js"></script><script src="https://cdn.jsdelivr.net/npm/velocity-animate@1.5.2/velocity.ui.min.js"></script><script src="https://cdn.jsdelivr.net/npm/lazyload@2.0.0-rc.2/lazyload.min.js"></script><script>function initSearch() {
+  var isXML = true;
+  var search_path = 'search.json';
+
+  if (!search_path) {
+    search_path = 'search.xml';
+  } else if (/json$/i.test(search_path)) {
+    isXML = false;
+  }
+
+  var path = '/' + search_path;
+  $.ajax({
+    url: path,
+    dataType: isXML ? 'xml' : 'json',
+    async: true,
+    success: function (res) {
+      var datas = isXML ? $('entry', res).map(function () {
+        // 将 XML 转为 JSON
+        return {
+          title: $('title', this).text(),
+          content: $('content', this).text(),
+          url: $('url', this).text()
+        };
+      }).get() : res;
+      var $input = $('.search-input input');
+      var $result = $('.search-results');
+      // 搜索对象（标题、内容）的权重，影响显示顺序
+      var WEIGHT = { title: 100, content: 1 };
+      var searchPost = function () {
+        var searchText = $input.val().toLowerCase().trim();
+        // 根据空白字符分隔关键字
+        var keywords = searchText.split(/[\s]+/);
+        // 搜索结果
+        var matchPosts = [];
+
+        // 有多个关键字时，将原文字整个保存下来
+        if (keywords.length > 1) {
+          keywords.push(searchText);
+        }
+        // 防止未输入字符时搜索
+        if (searchText.length > 0) {
+          datas.forEach(function (data) {
+            var isMatch  = false;
+            // 没有标题的文章使用预设的 i18n 变量代替
+            var title = (data.title && data.title.trim()) || '[ 文章无标题 ]';
+            var titleLower = title && title.toLowerCase();
+            // 删除 HTML 标签 和 所有空白字符
+            var content = data.content && data.content.replace(/<[^>]+>/g, '');
+            var contentLower = content && content.toLowerCase();
+            // 删除重复的 /
+            var postURL = data.url && decodeURI(data.url).replace(/\/{2,}/g, '/');
+            // 标题中匹配到的关键词
+            var titleHitSlice = [];
+            // 内容中匹配到的关键词
+            var contentHitSlice = [];
+
+            keywords.forEach(function (keyword) {
+              /**
+              * 获取匹配的关键词的索引
+              * @param {String} keyword 要匹配的关键字
+              * @param {String} text 原文字
+              * @param {Boolean} caseSensitive 是否区分大小写
+              * @param {Number} weight 匹配对象的权重。权重大的优先显示
+              * @return {Array}
+              */
+              function getIndexByword (word, text, caseSensitive, weight) {
+                if (!word || !text) {
+                  return [];
+                };
+
+                var startIndex = 0; // 每次匹配的开始索引
+                var index = -1;     // 匹配到的索引值
+                var result = [];    // 匹配结果
+
+                if (!caseSensitive) {
+                  word = word.toLowerCase();
+                  text = text.toLowerCase();
+                }
+
+                while((index = text.indexOf(word, startIndex)) !== -1) {
+                  var hasMatch = false;
+                  // 索引位置相同的关键词，保留长度较长的
+                  titleHitSlice.forEach(function (hit) {
+                    if (hit.index === index && hit.word.length < word.length) {
+                      hit.word = word;
+                      hasMatch = true;
+                    }
+                  });
+                  startIndex = index + word.length;
+                  !hasMatch && result.push({ index: index, word: word, weight: weight });
+                }
+                return result;
+              }
+              titleHitSlice = titleHitSlice.concat(getIndexByword(keyword, titleLower, false, WEIGHT.title));
+              contentHitSlice = contentHitSlice.concat(getIndexByword(keyword, contentLower, false, WEIGHT.content));
+            });
+
+            var hitTitle = titleHitSlice.length;
+            var hitContent = contentHitSlice.length;
+
+            if (hitTitle > 0 || hitContent > 0) {
+              isMatch = true;
+            }
+            if (isMatch) {
+              ;[titleHitSlice, contentHitSlice].forEach(function (hit) {
+                // 按照匹配文字的索引的递增顺序排序
+                hit.sort(function (left, right) {
+                  return left.index - right.index;
+                });
+              });
+              /**
+              * 给文本中匹配到的关键词添加标记，从而进行高亮显示
+              * @param {String} text 原文本
+              * @param {Array} hitSlice 匹配项的索引信息
+              * @param {Number} start 开始索引
+              * @param {Number} end 结束索引
+              * @return {String}
+              */
+              function highlightKeyword (text, hitSlice, start, end) {
+                if (!text || !hitSlice || !hitSlice.length) {
+                  return;
+                }
+
+                var result = '';
+                var startIndex = start;
+                var endIndex = end;
+                hitSlice.forEach(function (hit) {
+                  if (hit.index < startIndex) {
+                    return;
+                  }
+
+                  var hitWordEnd = hit.index + hit.word.length;
+                  result += text.slice(startIndex, hit.index);
+                  result += '<b>' + text.slice(hit.index, hitWordEnd) + '</b>';
+                  startIndex = hitWordEnd;
+                });
+                result += text.slice(startIndex, endIndex);
+                return result;
+              }
+
+              var postData = {};
+              // 文章总的搜索权重
+              var postWeight = titleHitSlice.length * WEIGHT.title + contentHitSlice.length * WEIGHT.content;
+              // 标记匹配关键词后的标题
+              var postTitle = highlightKeyword(title, titleHitSlice, 0, title.length) || title;
+              // 标记匹配关键词后的内容
+              var postContent;
+              // 显示内容的长度
+              var SHOW_WORD_LENGTH = 200;
+              // 命中关键词前的字符显示长度
+              var SHOW_WORD_FRONT_LENGTH = 20;
+              var SHOW_WORD_END_LENGTH = SHOW_WORD_LENGTH - SHOW_WORD_FRONT_LENGTH;
+
+              // 截取匹配的第一个字符，前后共 200 个字符来显示
+              if (contentHitSlice.length > 0) {
+                var firstIndex = contentHitSlice[0].index;
+                var start = firstIndex > SHOW_WORD_FRONT_LENGTH ? firstIndex - SHOW_WORD_FRONT_LENGTH : 0;
+                var end = firstIndex + SHOW_WORD_END_LENGTH;
+                postContent = highlightKeyword(content, contentHitSlice, start, end);
+              } else { // 未匹配到内容，直接截取前 200 个字符来显示
+                postContent = content.slice(0, SHOW_WORD_LENGTH);
+              }
+              postData.title = postTitle;
+              postData.content = postContent;
+              postData.url = postURL;
+              postData.weight = postWeight;
+              matchPosts.push(postData);
+            }
+          });
+        }
+
+        var resultInnerHtml = '';
+        if (matchPosts.length) {
+          // 按权重递增的顺序排序，使权重大的优先显示
+          matchPosts.sort(function (left, right) {
+            return right.weight - left.weight;
+          });
+          resultInnerHtml += '<ul>';
+          matchPosts.forEach(function (post) {
+            resultInnerHtml += '<li><a class="search-results-title" href="' + post.url + '">';
+            resultInnerHtml += post.title;
+            resultInnerHtml += '</a><div class="search-results-content">';
+            resultInnerHtml += post.content;
+            resultInnerHtml += '</div></li>';
+          });
+          resultInnerHtml += '</ul>';
+        } else {
+          resultInnerHtml += '<div class="search-results-none"><i class="far fa-meh"></i></div>';
+        }
+        $result.html(resultInnerHtml);
+      };
+      $input.on('input', searchPost);
+      $input.on('keyup', function (e) {
+        if (e.keyCode === Stun.utils.codeToKeyCode('Enter')) {
+          searchPost();
+        }
+      });
+    }
+  });
+}
+
+function closeSearch () {
+  $('body').css({ overflow: 'auto' });
+  $('.search-popup').css({ display: 'none' });
+  $('.search-mask').css({ display: 'none' });
+}
+
+window.addEventListener('DOMContentLoaded', function () {
+  Stun.utils.pjaxReloadLocalSearch = function () {
+    $('.header-nav-search').on('click', function (e) {
+      e.stopPropagation();
+      $('body').css('overflow', 'hidden');
+      $('.search-popup')
+        .velocity('stop')
+        .velocity('transition.expandIn', {
+          duration: 300,
+          complete: function () {
+            $('.search-popup input').focus();
+          }
+        });
+      $('.search-mask')
+        .velocity('stop')
+        .velocity('transition.fadeIn', {
+          duration: 300
+        });
+
+      initSearch();
+    });
+    $('.search-mask, .search-close').on('click', function () {
+      closeSearch();
+    });
+    $(document).on('keydown', function (e) {
+      // Escape <=> 27
+      if (e.keyCode === Stun.utils.codeToKeyCode('Escape')) {
+        closeSearch();
+      }
+    });
+  };
+
+  Stun.utils.pjaxReloadLocalSearch();
+}, false);
+
+function safeOpenUrl(url) {
+  var newTab = window.open();
+  newTab.opener = null;
+  newTab.location = url;
+}
+
+function extSearch(engine) {
+  var engines = {
+    google: 'https://www.google.com/search?q=',
+    bing: 'https://cn.bing.com/search?q=',
+    baidu: 'https://www.baidu.com/s?ie=UTF-8&wd=',
+  };
+  var host = window.location.host;
+  var query = $('.search-input input').val().toLowerCase().trim();
+  var uri = engines[engine] + query + ' site:' + host;
+
+  if (query) {
+    safeOpenUrl(uri);
+  } else {
+    Stun.utils.popAlert('warning', '请输入字符');
+  }
+}
+
+var assistSearchList = window.CONFIG.assistSearch;
+
+if (Array.isArray(assistSearchList)) {
+  assistSearchList.forEach(function (name) {
+    document.querySelector('.search-btns-item--' + name).addEventListener('click', function () {
+      extSearch(name);
+    }, false);
+  });
+}</script><script src="https://cdn.jsdelivr.net/npm/pjax@latest/pjax.min.js"></script><script>window.addEventListener('DOMContentLoaded', function () {
+  var pjax = new Pjax({"selectors":["head title","#main",".pjax-reload"],"history":true,"scrollTo":false,"scrollRestoration":false,"cacheBust":false,"debug":false,"currentUrlFullReload":false,"timeout":0});
+  // 加载进度条的计时器
+  var loadingTimer = null;
+
+  // 重置页面 Y 方向上的滚动偏移量
+  document.addEventListener('pjax:send', function () {
+    $('.header-nav-menu').removeClass('show');
+    if (CONFIG.pjax && CONFIG.pjax.avoidBanner) {
+      $('html').velocity('scroll', {
+        duration: 500,
+        offset: $('#header').height(),
+        easing: 'easeInOutCubic'
+      });
+    }
+
+    var loadingBarWidth = 20;
+    var MAX_LOADING_WIDTH = 95;
+
+    $('.loading-bar').addClass('loading');
+    $('.loading-bar__progress').css('width', loadingBarWidth + '%');
+    clearInterval(loadingTimer);
+    loadingTimer = setInterval(function () {
+      loadingBarWidth += 3;
+      if (loadingBarWidth > MAX_LOADING_WIDTH) {
+        loadingBarWidth = MAX_LOADING_WIDTH;
+      }
+      $('.loading-bar__progress').css('width', loadingBarWidth + '%');
+    }, 500);
+  }, false);
+
+  window.addEventListener('pjax:complete', function () {
+    clearInterval(loadingTimer);
+    $('.loading-bar__progress').css('width', '100%');
+    $('.loading-bar').removeClass('loading');
+    setTimeout(function () {
+      $('.loading-bar__progress').css('width', '0');
+    }, 400);
+    $('link[rel=prefetch], script[data-pjax-rm]').each(function () {
+      $(this).remove();
+    });
+    $('script[data-pjax], #pjax-reload script').each(function () {
+      $(this).parent().append($(this).remove());
+    });
+
+    if (Stun.utils.pjaxReloadBoot) {
+      Stun.utils.pjaxReloadBoot();
+    }
+    if (Stun.utils.pjaxReloadScroll) {
+      Stun.utils.pjaxReloadScroll();
+    }
+    if (Stun.utils.pjaxReloadSidebar) {
+      Stun.utils.pjaxReloadSidebar();
+    }
+    if (false) {
+      if (Stun.utils.pjaxReloadHeader) {
+        Stun.utils.pjaxReloadHeader();
+      }
+      if (Stun.utils.pjaxReloadScrollIcon) {
+        Stun.utils.pjaxReloadScrollIcon();
+      }
+      if (Stun.utils.pjaxReloadLocalSearch) {
+        Stun.utils.pjaxReloadLocalSearch();
+      }
+    }
+  }, false);
+}, false);</script><div id="pjax-reload"></div><script src="/js/utils.js?v=2.6.2"></script><script src="/js/stun-boot.js?v=2.6.2"></script><script src="/js/scroll.js?v=2.6.2"></script><script src="/js/header.js?v=2.6.2"></script><script src="/js/sidebar.js?v=2.6.2"></script><script type="application/json" src="/search.json"></script></body></html>
