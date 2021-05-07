@@ -1,6 +1,6 @@
-$(document).ready(function updateCoords(e) {
+function updateCoords(e) {
     pointerX = (e.clientX || e.touches[0].clientX) - canvasEl.getBoundingClientRect().left, pointerY = e.clientY || e.touches[0].clientY - canvasEl.getBoundingClientRect().top
-})
+}
 
 function setParticuleDirection(e) {
     var t = anime.random(0, 360) * Math.PI / 180, a = anime.random(50, 180), n = [-1, 1][anime.random(0, 1)] * a;
