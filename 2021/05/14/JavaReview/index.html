@@ -1,0 +1,652 @@
+<!DOCTYPE html><style>body {
+cursor: url(https://cdn.jsdelivr.net/gh/sviptzk/HexoStaticFile@latest/Hexo/img/default.cur),
+default;
+}
+a,
+img {
+cursor: url(https://cdn.jsdelivr.net/gh/sviptzk/HexoStaticFile@latest/Hexo/img/pointer.cur),
+default;
+}
+::-webkit-scrollbar-thumb {
+background-color: deeppink;
+background-image: -webkit-linear-gradient(45deg, rgba(255, 255, 255, .4) 25%, transparent 25%, transparent 50%, rgba(255, 255, 255, .4) 50%, rgba(255, 255, 255, .4) 75%, transparent 75%, transparent);
+border-radius: 3em;
+}
+::-webkit-scrollbar-track {
+background-color: lightpink;
+border-radius: 3em;
+}
+::-webkit-scrollbar {
+width: 15px;
+height: 15px;
+}</style><html lang="zh-CN"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1"><meta name="format-detection" content="telephone=no"><meta name="apple-mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-status-bar-style" content="black"><link rel="icon" href="/favicon-16x16.png?v=2.6.2" type="image/png" sizes="16x16"><link rel="icon" href="/favicon-32x32.png?v=2.6.2" type="image/png" sizes="32x32"><meta name="description" content="Java复习">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Java复习——从入土到入门">
+<meta property="og:url" content="http://taoyyz.github.io/2021/05/14/JavaReview/index.html">
+<meta property="og:site_name" content="欢迎光临taoyyz的Blog">
+<meta property="og:description" content="Java复习">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2021-05-14T10:02:17.000Z">
+<meta property="article:modified_time" content="2021-05-14T14:14:49.493Z">
+<meta property="article:author" content="taoyyz小陶">
+<meta property="article:tag" content="Java">
+<meta name="twitter:card" content="summary"><title>Java复习——从入土到入门 | 欢迎光临taoyyz的Blog</title><link ref="canonical" href="http://taoyyz.github.io/2021/05/14/JavaReview/"><link rel="dns-prefetch" href="https://cdn.jsdelivr.net"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5.12.1/css/all.min.css" type="text/css"><link rel="stylesheet" href="/css/index.css?v=2.6.2"><script>var Stun = window.Stun || {};
+var CONFIG = {
+  root: '/',
+  algolia: undefined,
+  assistSearch: undefined,
+  fontIcon: {"prompt":{"success":"fas fa-check-circle","info":"fas fa-arrow-circle-right","warning":"fas fa-exclamation-circle","error":"fas fa-times-circle"},"copyBtn":"fas fa-copy"},
+  sidebar: {"offsetTop":"20px","tocMaxDepth":6},
+  header: {"enable":true,"showOnPost":true,"scrollDownIcon":true},
+  postWidget: {"endText":true},
+  nightMode: {"enable":true},
+  back2top: {"enable":true},
+  codeblock: {"style":"carbon","highlight":"light","wordWrap":true},
+  reward: true,
+  fancybox: false,
+  zoomImage: {"gapAside":"20px"},
+  galleryWaterfall: undefined,
+  lazyload: true,
+  pjax: {"avoidBanner":false},
+  externalLink: {"icon":{"enable":true,"name":"fas fa-external-link-alt"}},
+  shortcuts: undefined,
+  prompt: {"copyButton":"复制","copySuccess":"复制成功","copyError":"复制失败"},
+  sourcePath: {"js":"js","css":"css","images":"images"},
+};
+
+window.CONFIG = CONFIG;</script><meta name="generator" content="Hexo 5.4.0"></head><body><canvas class="fireworks" style="position: fixed;left: 0;top: 0;z-index: 1; pointer-events: none;"></canvas><script type="text/javascript" src="//cdn.bootcss.com/animejs/2.2.0/anime.min.js"></script><script type="text/javascript" src="/js/firework.js"></script><div class="container" id="container"><header class="header" id="header"><div class="header-inner"><nav class="header-nav header-nav--fixed"><div class="header-nav-inner"><div class="header-nav-menubtn"><i class="fas fa-bars"></i></div><div class="header-nav-menu"><div class="header-nav-menu-item"><a class="header-nav-menu-item__link" href="/"><span class="header-nav-menu-item__icon"><i class="fas fa-home"></i></span><span class="header-nav-menu-item__text">首页</span></a></div><div class="header-nav-menu-item"><a class="header-nav-menu-item__link" href="/archives/"><span class="header-nav-menu-item__icon"><i class="fas fa-folder-open"></i></span><span class="header-nav-menu-item__text">归档</span></a></div><div class="header-nav-menu-item"><a class="header-nav-menu-item__link" href="/categories/"><span class="header-nav-menu-item__icon"><i class="fas fa-layer-group"></i></span><span class="header-nav-menu-item__text">分类</span></a></div><div class="header-nav-menu-item"><a class="header-nav-menu-item__link" href="/tags/"><span class="header-nav-menu-item__icon"><i class="fas fa-tags"></i></span><span class="header-nav-menu-item__text">标签</span></a></div><div class="header-nav-menu-item"><a class="header-nav-menu-item__link" href="/links/"><span class="header-nav-menu-item__icon"><i class="fas fa-link"></i></span><span class="header-nav-menu-item__text">资源和链接</span></a></div><div class="header-nav-menu-item"><a class="header-nav-menu-item__link" href="/about/"><span class="header-nav-menu-item__icon"><i class="far fa-address-card"></i></span><span class="header-nav-menu-item__text">关于</span></a></div></div><div class="header-nav-search"><span class="header-nav-search__icon"><i class="fas fa-search"></i></span><span class="header-nav-search__text">搜索</span></div><div class="header-nav-mode"><div class="mode"><div class="mode-track"><span class="mode-track-moon"></span><span class="mode-track-sun"></span></div><div class="mode-thumb"></div></div></div></div></nav><div class="header-banner"><div class="header-banner-info"><div class="header-banner-info__title">欢迎光临taoyyz的Blog</div><div class="header-banner-info__subtitle"></div></div><div class="header-banner-arrow"><div class="header-banner-arrow__icon"><i class="fas fa-angle-down"></i></div></div></div></div></header><main class="main" id="main"><div class="main-inner"><div class="content-wrap" id="content-wrap"><div class="content" id="content"><!-- Just used to judge whether it is an article page--><div id="is-post"></div><div class="post"><header class="post-header"><h1 class="post-title">Java复习——从入土到入门</h1><div class="post-meta"><span class="post-meta-item post-meta-item--createtime"><span class="post-meta-item__icon"><i class="far fa-calendar-plus"></i></span><span class="post-meta-item__info">发表于</span><span class="post-meta-item__value">2021-05-14</span></span><span class="post-meta-item post-meta-item--updatetime"><span class="post-meta-item__icon"><i class="far fa-calendar-check"></i></span><span class="post-meta-item__info">更新于</span><span class="post-meta-item__value">2021-05-14</span></span><span class="post-meta-item post-meta-item--wordcount"><span class="post-meta-item__icon"><i class="far fa-file-word"></i></span><span class="post-meta-item__info">字数统计</span><span class="post-meta-item__value">3.9k</span></span><span class="post-meta-item post-meta-item--readtime"><span class="post-meta-item__icon"><i class="far fa-clock"></i></span><span class="post-meta-item__info">阅读时长</span><span class="post-meta-item__value">25分</span></span></div></header><div class="post-body">
+        <h1 id="Java知识点概览：">
+          <a href="#Java知识点概览：" class="heading-link"><i class="fas fa-link"></i></a><a href="#Java知识点概览：" class="headerlink" title="Java知识点概览："></a>Java知识点概览：</h1>
+      
+        <h2 id="Java的概念和特点：">
+          <a href="#Java的概念和特点：" class="heading-link"><i class="fas fa-link"></i></a><a href="#Java的概念和特点：" class="headerlink" title="Java的概念和特点："></a>Java的概念和特点：</h2>
+      
+        <h3 id="概念">
+          <a href="#概念" class="heading-link"><i class="fas fa-link"></i></a><a href="#概念" class="headerlink" title="概念"></a>概念</h3>
+      <p>&emsp;&emsp;Java是一门面向对象编程语言，不仅吸收了C++语言的各种优点， 还摒弃了C++里难以理解的多继承、指针等概念，因此Java语言具有功能强大和简单易用两个特征。<br>&emsp;&emsp;由上述介绍可知：<br>&emsp;&emsp;&emsp;&emsp;1. Java是一门面向对象的语言<br>&emsp;&emsp;&emsp;&emsp;2. Java是单继承的<br>&emsp;&emsp;&emsp;&emsp;3. Java语法没有指针概念</p>
+
+        <h3 id="特点">
+          <a href="#特点" class="heading-link"><i class="fas fa-link"></i></a><a href="#特点" class="headerlink" title="特点"></a>特点</h3>
+      <p>&emsp;&emsp;Java还有几个重要特点：<br>&emsp;&emsp;&emsp;&emsp;1. Java是类型安全的<br>&emsp;&emsp;&emsp;&emsp;2. Java是跨平台的</p>
+
+        <h3 id="Java的JVM、JRE、JDK">
+          <a href="#Java的JVM、JRE、JDK" class="heading-link"><i class="fas fa-link"></i></a><a href="#Java的JVM、JRE、JDK" class="headerlink" title="Java的JVM、JRE、JDK"></a>Java的JVM、JRE、JDK</h3>
+      <p>&emsp;&emsp;Java的跨平台性是区别于其他语言的显著特点：<br>&emsp;&emsp;&emsp;&emsp;Java程序运行在<font color="red">JVM</font>(Java虚拟机)上，我们写的Java源代码通过javac命令编译成.class字节码文件，这个字节码文件可以在各个平台的JVM环境上运行。<br>&emsp;&emsp;&emsp;&emsp;Java运行环境(<font color="red">JRE</font>)：光有JVM是不够的，Java还需要依赖一些类库，这些类库存在于JRE中，所以JRE包括两部分：JVM和类库<br>&emsp;&emsp;&emsp;&emsp;Java开发工具包(<font color="red">JDK</font>)：作为开发人员，我们需要编译、调试Java程序，例如javac就存在于JDK中。<br>&emsp;&emsp;&emsp;&emsp;所以，想要运行Java程序，借助JRE这个运行环境即可，而开发Java程序，需要JDK这个开发工具包。</p>
+
+        <h2 id="Java基本语法">
+          <a href="#Java基本语法" class="heading-link"><i class="fas fa-link"></i></a><a href="#Java基本语法" class="headerlink" title="Java基本语法"></a>Java基本语法</h2>
+      
+        <h3 id="数据类型">
+          <a href="#数据类型" class="heading-link"><i class="fas fa-link"></i></a><a href="#数据类型" class="headerlink" title="数据类型"></a>数据类型</h3>
+      <p>&emsp;&emsp;Java的数据类型大体上可以分为2种：<br>&emsp;&emsp;&emsp;&emsp;1. <font color="red">基本</font>数据类型<br>&emsp;&emsp;&emsp;&emsp;2. <font color="red">引用</font>数据类型</p>
+
+        <h4 id="基本数据类型：">
+          <a href="#基本数据类型：" class="heading-link"><i class="fas fa-link"></i></a><a href="#基本数据类型：" class="headerlink" title="基本数据类型："></a>基本数据类型：</h4>
+      <p>&emsp;&emsp;和C语言类似：Java也有整型、浮点型之分，除此之外，Java还多了一种更小的整型：byte型，还有一种表达真假的、仅有两个值的数据类型：boolean<br>&emsp;&emsp;<font color="red">基本数据类型</font>一共有4类，8种：<br>&emsp;&emsp;&emsp;&emsp;1. 整型：byte、short、int、long<br>&emsp;&emsp;&emsp;&emsp;2. 浮点型：float、double<br>&emsp;&emsp;&emsp;&emsp;3. 字符型：char<br>&emsp;&emsp;&emsp;&emsp;4. 布尔型：boolean</p>
+
+        <h4 id="引用数据类型：">
+          <a href="#引用数据类型：" class="heading-link"><i class="fas fa-link"></i></a><a href="#引用数据类型：" class="headerlink" title="引用数据类型："></a>引用数据类型：</h4>
+      <p>&emsp;&emsp;除了基本数据类型外，Java中的各种对象称为引用数据类型<br>&emsp;&emsp;<font color="red">引用数据类型</font>主要有：<br>&emsp;&emsp;&emsp;&emsp;1. 数组<br>&emsp;&emsp;&emsp;&emsp;2. 类：Class<br>&emsp;&emsp;&emsp;&emsp;3. 接口：Interface<br>&emsp;&emsp;&emsp;&emsp;4. 注解：Annotation(一种特殊的接口)<br>&emsp;&emsp;我们常用的引用类型有数组(int[]整型数组，char[]字符型数组，甚至Person[]对象数组)、类(例如上面提到的String字符串类)和接口(内含抽象方法)。</p>
+
+        <h3 id="程序结构">
+          <a href="#程序结构" class="heading-link"><i class="fas fa-link"></i></a><a href="#程序结构" class="headerlink" title="程序结构"></a>程序结构</h3>
+      
+        <h4 id="分支">
+          <a href="#分支" class="heading-link"><i class="fas fa-link"></i></a><a href="#分支" class="headerlink" title="分支"></a>分支</h4>
+      <p>&emsp;&emsp;分支结构主要有：<br>&emsp;&emsp;&emsp;&emsp;1. if<br>&emsp;&emsp;&emsp;&emsp;2. else<br>&emsp;&emsp;&emsp;&emsp;3. else if<br>&emsp;&emsp;&emsp;&emsp;4. switch…case<br>&emsp;&emsp;值得注意的是：<font color="red">else总是与最近的if配对</font></p>
+
+        <h4 id="循环">
+          <a href="#循环" class="heading-link"><i class="fas fa-link"></i></a><a href="#循环" class="headerlink" title="循环"></a>循环</h4>
+      <p>&emsp;&emsp;循环结构主要有：<br>&emsp;&emsp;&emsp;&emsp;1. while循环<br>&emsp;&emsp;&emsp;&emsp;2. do…while循环<br>&emsp;&emsp;&emsp;&emsp;3. for循环<br>&emsp;&emsp;三种循环均可以互相转换，<font color="red">do…while循环至少会执行一次</font><br>&emsp;&emsp;结束本次循环，继续下次循环<font color="red">continue关键字</font>，直接结束掉循环体<font color="red">break关键字</font></p>
+
+        <h3 id="数据的输入与输出">
+          <a href="#数据的输入与输出" class="heading-link"><i class="fas fa-link"></i></a><a href="#数据的输入与输出" class="headerlink" title="数据的输入与输出"></a>数据的输入与输出</h3>
+      
+        <h4 id="数据输入">
+          <a href="#数据输入" class="heading-link"><i class="fas fa-link"></i></a><a href="#数据输入" class="headerlink" title="数据输入"></a>数据输入</h4>
+      <p>&emsp;&emsp;<font color="red">利用Scanner类</font>，或利用文件操作相关的类<br>&emsp;&emsp;常用写法：<code>Scanner sc = new Scanner(System.in)</code></p>
+
+        <h4 id="数据输出">
+          <a href="#数据输出" class="heading-link"><i class="fas fa-link"></i></a><a href="#数据输出" class="headerlink" title="数据输出"></a>数据输出</h4>
+      <p>&emsp;&emsp;<font color="red">利用System类的输出流静态变量out下的多种print()方法</font>，或利用文件操作相关的类<br>&emsp;&emsp;常用写法：<code>System.out.println()</code></p>
+
+        <h2 id="Java的面向对象">
+          <a href="#Java的面向对象" class="heading-link"><i class="fas fa-link"></i></a><a href="#Java的面向对象" class="headerlink" title="Java的面向对象"></a>Java的面向对象</h2>
+      
+        <h3 id="简介">
+          <a href="#简介" class="heading-link"><i class="fas fa-link"></i></a><a href="#简介" class="headerlink" title="简介"></a>简介</h3>
+      <p>&emsp;&emsp;所谓的面向对象，是相对于面向过程(C语言)而言的。<br>&emsp;&emsp;例如：我们需要把一个字符串”china”转化为大写字母:<br>&emsp;&emsp;<font color="red">面向过程</font>的思想是利用循环，分别对每一个字符的ASCII码进行处理(因为小写字母和大写字母的ASCII码存在特定的联系)<br>&emsp;&emsp;而<font color="red">面向对象</font>的思想中，我们不关心具体怎么处理，而是利用一个能够处理<b>小写转为大写</b>的<font color="red">对象</font>来处理：<br>&emsp;&emsp;例如String类的toUpperCase()方法，就能把该字符串对象转换为大写字母<br>&emsp;&emsp;上面提到的String类是JDK的Java大神写好的类，类中有很多有用的<font color="red">方法</font>，除了大小写转换外，还有split()分割字符串、substring()截取字符串、charAt()返回某个字符的下标位置等等<br>&emsp;&emsp;另外，除了JDK的大神写好的类外，我们也可以自己定义一些类，一旦定义了一个类，就能通过new关键字不断创建这个类的实例，也叫对象。可以说，<font color="green">类是对一个对象共同特征的一种抽取，它只是一个模板，是抽象的；而对象才是类的一个实例，我们的操作一般是通过实例化出来的对象来操作。</font>这一点放在第三章讲。</p>
+
+        <h3 id="面向对象思想">
+          <a href="#面向对象思想" class="heading-link"><i class="fas fa-link"></i></a><a href="#面向对象思想" class="headerlink" title="面向对象思想"></a>面向对象思想</h3>
+      
+        <h4 id="封装">
+          <a href="#封装" class="heading-link"><i class="fas fa-link"></i></a><a href="#封装" class="headerlink" title="封装"></a>封装</h4>
+      <p>&emsp;&emsp;封装就是把具有一定共性的属性抽取出来，形成一个模板，我们称之为类(Class)，同时，我们对外尽量隐藏内部实现细节，而只提供一个公共接口(非特指interface)访问。这样可以使得程序更容易维护，也加强了安全性。</p>
+
+        <h4 id="继承">
+          <a href="#继承" class="heading-link"><i class="fas fa-link"></i></a><a href="#继承" class="headerlink" title="继承"></a>继承</h4>
+      <p>&emsp;&emsp;类(Class)与类之间是可以继承的，但要注意，Java是<font color="red">单继承</font>的，即一个类只有一个直接父类。继承对于子类来说是对父类的扩充，而父类是对子类的抽象。所以子类不但含有父类的内容，也可以新增自己的内容。<br>&emsp;&emsp;例如<code>class Student extends Person</code></p>
+
+        <h4 id="多态">
+          <a href="#多态" class="heading-link"><i class="fas fa-link"></i></a><a href="#多态" class="headerlink" title="多态"></a>多态</h4>
+      <p>&emsp;&emsp;多态是同一个行为具有多个不同表现形式或形态的能力。Java中，可以把一个<font color="red">子类赋值给一个父类。</font><br>&emsp;&emsp;例如<code>Person stu1 = new Student()</code><br>&emsp;&emsp;多态是以继承为前提的，并且多态的子类在赋值给父类时，相当于把子类当作父类使用，即此时的子类特有属性和方法被隐藏起来了。我们可以利用强制类型转换把一个多态父类中的子类重新转换为子类。<br>&emsp;&emsp;例如<code>(Student)stu1</code>把Person类型的对象stu1重新转为子类Student<br>&emsp;&emsp;但是要注意，不能把一个本来就不是子类的对象转为子类<br>&emsp;&emsp;例如：</p>
+<figure class="highlight c"><div class="table-container"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">Person stu2 = <span class="keyword">new</span> Person();</span><br><span class="line">(Student)stu2;</span><br><span class="line"><span class="comment">//此时会引发类型转换异常</span></span><br></pre></td></tr></table></div></figure>
+
+        <h3 id="类中的成员">
+          <a href="#类中的成员" class="heading-link"><i class="fas fa-link"></i></a><a href="#类中的成员" class="headerlink" title="类中的成员"></a>类中的成员</h3>
+      
+        <h4 id="成员变量">
+          <a href="#成员变量" class="heading-link"><i class="fas fa-link"></i></a><a href="#成员变量" class="headerlink" title="成员变量"></a>成员变量</h4>
+      <p>&emsp;&emsp;成员变量在类中仅作声明，实际上在类实例化成一个对象时才会初始化和分配空间。<br>&emsp;&emsp;定义成员变量：</p>
+<figure class="highlight c"><div class="table-container"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Person</span>&#123;</span></span><br><span class="line">    <span class="keyword">int</span> age;    <span class="comment">//年龄</span></span><br><span class="line">    String name;<span class="comment">//姓名</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></div></figure>
+<p>&emsp;&emsp;成员变量可用权限修饰符修饰：public、protected、不写(default)、private</p>
+
+        <h4 id="成员方法">
+          <a href="#成员方法" class="heading-link"><i class="fas fa-link"></i></a><a href="#成员方法" class="headerlink" title="成员方法"></a>成员方法</h4>
+      <p>&emsp;&emsp;成员方法类似于C语言的函数(function)，在Java中，它叫方法(method)，用来实现某种操作。<br>&emsp;&emsp;定义成员方法：</p>
+<figure class="highlight c"><div class="table-container"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Person</span>&#123;</span></span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">speak</span><span class="params">()</span></span>&#123;</span><br><span class="line">        System.out.println(<span class="string">&quot;Person类的成员方法speak()&quot;</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></div></figure>
+<p>&emsp;&emsp;同样的，成员方法也可用权限修饰符修饰：public、protected、不写(default)、private</p>
+
+        <h4 id="静态变量">
+          <a href="#静态变量" class="heading-link"><i class="fas fa-link"></i></a><a href="#静态变量" class="headerlink" title="静态变量"></a>静态变量</h4>
+      <p>&emsp;&emsp;又叫类变量，静态变量是用static修饰的变量，此时这个变量不属于某个具体对象，而是属于类，直接利用<font color="red">类名.静态变量名</font>使用。对它的修改会影响所有用到静态变量的地方。因为它在内存中只保存了一份，任何用到它的地方都指向唯一的地址。</p>
+
+        <h4 id="静态方法">
+          <a href="#静态方法" class="heading-link"><i class="fas fa-link"></i></a><a href="#静态方法" class="headerlink" title="静态方法"></a>静态方法</h4>
+      <p>&emsp;&emsp;同样的，静态方法又叫类方法，是用static修饰的方法，此时这个方法也不属于某个具体对象，而是属于类，直接利用<font color="red">类名.静态方法名</font>调用方法。<br>&emsp;&emsp;<font color="green">值得注意的是，在静态方法中不能调用非静态变量(包括this关键字)，因为静态方法会先于main()加载，此时静态方法内的非静态变量还没有被初始化。</font></p>
+
+        <h4 id="静态代码块">
+          <a href="#静态代码块" class="heading-link"><i class="fas fa-link"></i></a><a href="#静态代码块" class="headerlink" title="静态代码块"></a>静态代码块</h4>
+      <p>&emsp;&emsp;形如：</p>
+<figure class="highlight c"><div class="table-container"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">static</span> &#123;</span><br><span class="line">    System.out.println(<span class="string">&quot;类中的静态代码块&quot;</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></div></figure>
+<p>&emsp;&emsp;这样的代码块叫做静态代码块，它会<font color="red">在类初始化之前执行一次，且只会执行一次。</font>如果一个类中有多个静态代码块，那么会从上到下依次执行一次，且只会执行一次。</p>
+
+        <h3 id="构造方法和对象的初始化">
+          <a href="#构造方法和对象的初始化" class="heading-link"><i class="fas fa-link"></i></a><a href="#构造方法和对象的初始化" class="headerlink" title="构造方法和对象的初始化"></a>构造方法和对象的初始化</h3>
+      
+        <h4 id="构造方法">
+          <a href="#构造方法" class="heading-link"><i class="fas fa-link"></i></a><a href="#构造方法" class="headerlink" title="构造方法"></a>构造方法</h4>
+      <p>&emsp;&emsp;构造方法是类中特殊的方法，用于初始化一个类，在创建对象(实例化一个类为对象)时调用。<br>&emsp;&emsp;特点是：<br>&emsp;&emsp;&emsp;&emsp;1. <font color="red">没有返回值，void也不能写。</font><br>&emsp;&emsp;&emsp;&emsp;2. <font color="red">名称与类名相同</font><br>&emsp;&emsp;&emsp;&emsp;3. <font color="red">如果不写，类中会默认隐式声明一个无参构造。一旦定义了一个构造方法，将不会隐式声明其他构造方法。</font><br>&emsp;&emsp;&emsp;&emsp;4. 可以有多种重载形式<br>&emsp;&emsp;&emsp;&emsp;5. 在继承关系中，子类会默认调用父类的无参构造，形如：<code>super()</code>，并且只能写在方法的第一行。<br>&emsp;&emsp;&emsp;&emsp;6. 可以利用this()调用其他重载的构造方法，但是不能形成递归，否则会造成栈溢出。并且this()也只能写在方法的第一行。可见，this()和super()不可能在同一个构造方法中同时出现。</p>
+
+        <h4 id="对象的初始化">
+          <a href="#对象的初始化" class="heading-link"><i class="fas fa-link"></i></a><a href="#对象的初始化" class="headerlink" title="对象的初始化"></a>对象的初始化</h4>
+      <p>&emsp;&emsp;静态代码块会在第一次使用到该类时执行，静态变量也会随之初始化。<br>&emsp;&emsp;在使用new 构造方法()初始化一个对象时，会执行该类的构造方法来实例化类为对象。<br>&emsp;&emsp;类中的成员变量会被初始化为<font color="red">默认值</font>。具体默认值参考：</p>
+<figure class="highlight c"><div class="table-container"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//默认值：</span></span><br><span class="line">                整型：       <span class="number">0</span></span><br><span class="line">                浮点型：     <span class="number">0.0</span></span><br><span class="line">                字符型：     <span class="string">&#x27;\u0000&#x27;</span></span><br><span class="line">                布尔型：     <span class="literal">false</span></span><br><span class="line">                引用类型：    null</span><br></pre></td></tr></table></div></figure>
+<p>&emsp;&emsp;<font color="red">new出来的对象在堆中，直到被垃圾回收。而方法在栈中，一旦方法执行完毕，会被立马弹出栈。</font></p>
+
+        <h2 id="Java常用类">
+          <a href="#Java常用类" class="heading-link"><i class="fas fa-link"></i></a><a href="#Java常用类" class="headerlink" title="Java常用类"></a>Java常用类</h2>
+      
+        <h3 id="字符串类">
+          <a href="#字符串类" class="heading-link"><i class="fas fa-link"></i></a><a href="#字符串类" class="headerlink" title="字符串类"></a>字符串类</h3>
+      
+        <h4 id="String">
+          <a href="#String" class="heading-link"><i class="fas fa-link"></i></a><a href="#String" class="headerlink" title="String"></a>String</h4>
+      <p>&emsp;&emsp;最常用的字符串，底层是用final修饰的数组，所以值不可改变。<br>&emsp;&emsp;可以利用”+”号连接字符串，但不能直接用于数值计算。值得注意的是：<br>&emsp;&emsp;当利用<code>String str = &quot;abc&quot;;</code>定义一个String对象时，”abc”这个字符串会被放入字符串常量池，其他的字符串对象会共用这个”abc”字符串内容。<br>&emsp;&emsp;而利用<code>String str = new String(&quot;abc&quot;);</code>定义时，这个str指向堆中的对象。<br>&emsp;&emsp;我们知道，”==”对于基本数据类型是比较数值，而对于引用类型是比较地址值，显然，第二种方式创建的对象在堆中的地址是不同的，所以会返回false，而常量池中的对象地址相同，会返回true<br>&emsp;&emsp;<font color="red">高频常用方法：</font><br>&emsp;&emsp;&emsp;&emsp;1. equals()：由于String类重写了Object类的equals()方法返回一个boolean值，建议在比较字符串时使用equals()方法而不是”==”<br>&emsp;&emsp;&emsp;&emsp;2. compareTo()：由于String类实现了Comparable接口并重写了compareTo()方法，当两个字符串相同时，会返回0</p>
+
+        <h4 id="StringBuilder">
+          <a href="#StringBuilder" class="heading-link"><i class="fas fa-link"></i></a><a href="#StringBuilder" class="headerlink" title="StringBuilder"></a>StringBuilder</h4>
+      <p>&emsp;&emsp;可变长度的字符串，初始长度为16加上字符串参数的长度。<br>&emsp;&emsp;例如：<code>StringBuilder s = new StringBuilder(&quot;123&quot;);</code>的长度为16+3=&gt;19<br>&emsp;&emsp;不能使用”+”号连接，可利用append()方法追加StringBuilder对象。<br>&emsp;&emsp;可以使用toString()方法返回此StringBuilder对象的String类形式。</p>
+
+        <h4 id="StringBuffer">
+          <a href="#StringBuffer" class="heading-link"><i class="fas fa-link"></i></a><a href="#StringBuffer" class="headerlink" title="StringBuffer"></a>StringBuffer</h4>
+      <p>&emsp;&emsp;相当于线程安全的StringBuilder，由于做了同步操作，速度略慢于StringBuilder</p>
+
+        <h3 id="日期类">
+          <a href="#日期类" class="heading-link"><i class="fas fa-link"></i></a><a href="#日期类" class="headerlink" title="日期类"></a>日期类</h3>
+      
+        <h4 id="Date类">
+          <a href="#Date类" class="heading-link"><i class="fas fa-link"></i></a><a href="#Date类" class="headerlink" title="Date类"></a>Date类</h4>
+      <p>&emsp;&emsp;Java中时间的计算以1970年1月1日00:00:00为起点，计算至今的毫秒值。<br>&emsp;&emsp;创建一个当前系统时间的Date对象的方法：<code>Date date = new Date();</code><br>&emsp;&emsp;Date类常用方法：<br>&emsp;&emsp;&emsp;&emsp;1. getTime()：返回Date类对象的毫秒值<br>&emsp;&emsp;&emsp;&emsp;2. setTime()：参数传入一个long类型的毫秒值，以设置Date对象的日期<br>&emsp;&emsp;&emsp;&emsp;3. getYear()：返回Date对象的年份<br>&emsp;&emsp;&emsp;&emsp;4. getMonth()：返回Date对象的月份(注意：此月份比实际月份少1，因为范围为0-11)<br>&emsp;&emsp;&emsp;&emsp;5. getDate()：返回Date对象在月份中的天数<br>&emsp;&emsp;&emsp;&emsp;6. getDay()：返回Date对象在一周中的星期几(注意：星期日为0)</p>
+
+        <h4 id="Calendar类">
+          <a href="#Calendar类" class="heading-link"><i class="fas fa-link"></i></a><a href="#Calendar类" class="headerlink" title="Calendar类"></a>Calendar类</h4>
+      <p>&emsp;&emsp;Date类中的大部分方法已经由Calendar类代替。<br>&emsp;&emsp;注意创建Calendar对象的方法：<code>Calendar cal = Calendar.getInstance();</code><br>&emsp;&emsp;创建的Calendar对象包含很多字段(Field)，例如一年中的第几天、一年中的第几周、年份、月份、天数等等…<br>&emsp;&emsp;Calender类常用方法类似于Date类，获取字段的方法集中在get()方法中：<br>&emsp;&emsp;&emsp;&emsp;1. getTime()：返回Calendar类对象的毫秒值<br>&emsp;&emsp;&emsp;&emsp;2. get()：参数可以为YEAR、MONTH、DAY_OF_YEAR等等…<br>&emsp;&emsp;<font color="red">同样的，注意Date类和Calendar类的月份都比实际月份少1，因为范围为0-11</font></p>
+
+        <h3 id="集合类">
+          <a href="#集合类" class="heading-link"><i class="fas fa-link"></i></a><a href="#集合类" class="headerlink" title="集合类"></a>集合类</h3>
+      
+        <h4 id="List接口的集合">
+          <a href="#List接口的集合" class="heading-link"><i class="fas fa-link"></i></a><a href="#List接口的集合" class="headerlink" title="List接口的集合"></a>List<E>接口的集合</E></h4>
+      <p>&emsp;&emsp;List<E>接口的集合<font color="red">类似于数组</font>，它有3个特点：<br>&emsp;&emsp;&emsp;&emsp;1. 有序的<br>&emsp;&emsp;&emsp;&emsp;2. 有索引<br>&emsp;&emsp;&emsp;&emsp;3. 允许存储重复元素</E></p>
+
+        <h5 id="ArrayList">
+          <a href="#ArrayList" class="heading-link"><i class="fas fa-link"></i></a><a href="#ArrayList" class="headerlink" title="ArrayList"></a>ArrayList<E></E></h5>
+      <p>&emsp;&emsp;底层是数组，查询快，增删慢</p>
+
+        <h5 id="LinkedList">
+          <a href="#LinkedList" class="heading-link"><i class="fas fa-link"></i></a><a href="#LinkedList" class="headerlink" title="LinkedList"></a>LinkedList<E></E></h5>
+      <p>&emsp;&emsp;底层是双向链表，查询慢、增删快(区别于Vector，LinkedList不同步)<br>&emsp;&emsp;有特有方法：<br>&emsp;&emsp;&emsp;&emsp;1. addFirst(E e)：插入e到开头<br>&emsp;&emsp;&emsp;&emsp;2. addLast(E e)：插入e到结尾<br>&emsp;&emsp;&emsp;&emsp;3. getFirst(E e)：返回第一个元素<br>&emsp;&emsp;&emsp;&emsp;4. getLast(E e)：返回最后一个元素</p>
+
+        <h5 id="Vector">
+          <a href="#Vector" class="heading-link"><i class="fas fa-link"></i></a><a href="#Vector" class="headerlink" title="Vector"></a>Vector<E></E></h5>
+      <p>&emsp;&emsp;底层是数组，查询快，增删慢(区别于LinkedList，Vector是同步的)<br>&emsp;&emsp;特有方法：addElement(E e)：将e添加到此集合末尾，并使大小+1</p>
+
+        <h4 id="Set接口的集合">
+          <a href="#Set接口的集合" class="heading-link"><i class="fas fa-link"></i></a><a href="#Set接口的集合" class="headerlink" title="Set接口的集合"></a>Set<E>接口的集合</E></h4>
+      <p>&emsp;&emsp;Set<E>接口的集合重要特点是<font color="red">不允许重复元素</font>，特点为：<br>&emsp;&emsp;&emsp;&emsp;1. 不包含重复元素<br>&emsp;&emsp;&emsp;&emsp;2. 无索引(所以也就不能用普通for循环遍历，可以使用迭代器或增强for循环)</E></p>
+
+        <h5 id="HashSet">
+          <a href="#HashSet" class="heading-link"><i class="fas fa-link"></i></a><a href="#HashSet" class="headerlink" title="HashSet"></a>HashSet<E></E></h5>
+      <p>&emsp;&emsp;特点：<br>&emsp;&emsp;&emsp;&emsp;1. 底层是哈希表，查询速度极快<br>&emsp;&emsp;&emsp;&emsp;2. 无序的</p>
+
+        <h5 id="LinkedHashSet">
+          <a href="#LinkedHashSet" class="heading-link"><i class="fas fa-link"></i></a><a href="#LinkedHashSet" class="headerlink" title="LinkedHashSet"></a>LinkedHashSet<E></E></h5>
+      <p>&emsp;&emsp;&emsp;&emsp;1. 底层是哈希表，查询速度极快<br>&emsp;&emsp;&emsp;&emsp;2. 有序的(多了一个链表记录顺序)</p>
+
+        <h4 id="Map-lt-K-V-gt-接口的集合">
+          <a href="#Map-lt-K-V-gt-接口的集合" class="heading-link"><i class="fas fa-link"></i></a><a href="#Map-lt-K-V-gt-接口的集合" class="headerlink" title="Map&lt;K,V&gt;接口的集合"></a>Map&lt;K,V&gt;接口的集合</h4>
+      <p>&emsp;&emsp;Map集合是一个双列集合，由键K和值V组成，<font color="red">其中键K不允许重复</font><br>&emsp;&emsp;特点：<br>&emsp;&emsp;&emsp;&emsp;1. K不能重复<br>&emsp;&emsp;&emsp;&emsp;2. K和V的类型任意<br>&emsp;&emsp;&emsp;&emsp;3. 每一个K只对应一个V<br>&emsp;&emsp;常用方法：<br>&emsp;&emsp;&emsp;&emsp;1. put(K k,V v)：把一个元素放入集合，如果K已经存在则替换原来的V为新V<br>&emsp;&emsp;&emsp;&emsp;2. get(Object k)：取出K对应的V，如果不存在则返回null<br>&emsp;&emsp;&emsp;&emsp;3. remove(Object k)：删除K指定的键值对<br>&emsp;&emsp;&emsp;&emsp;4. clear()：清空这个Map集合</p>
+</div><footer class="post-footer"><div class="post-ending ending"><div class="ending__text">------ 本文结束，感谢您的阅读 ------</div></div><div class="post-tags"><span class="post-tags-item"><span class="post-tags-item__icon"><i class="fas fa-tag"></i></span><a class="post-tags-item__link" href="http://taoyyz.github.io/tags/Java/">Java</a></span></div><div class="post-reward reward"><div class="reward-button">看的开心的话可以请我喝杯奶茶~热狗也行呜呜呜</div><div class="reward-qrcode"><span class="reward-qrcode-alipay"><img class="reward-qrcode-alipay__img" src="/images/zfb.jpg"><div class="reward-qrcode-alipay__text">支付宝</div></span><span class="reward-qrcode-wechat"><img class="reward-qrcode-wechat__img" src="/images/vx.jpg"><div class="reward-qrcode-wechat__text">微信</div></span></div></div><nav class="post-paginator paginator"><div class="paginator-next"><a class="paginator-next__link" href="/2021/05/01/Java-Swing/"><span class="paginator-prev__text">Java-swing图形化——小小留言板</span><span class="paginator-next__icon"><i class="fas fa-angle-right"></i></span></a></div></nav></footer></div></div></div><div class="sidebar-wrap" id="sidebar-wrap"><aside class="sidebar" id="sidebar"><div class="sidebar-nav"><span class="sidebar-nav-toc current">文章目录</span><span class="sidebar-nav-ov">站点概览</span></div><section class="sidebar-toc"><ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#Java%E7%9F%A5%E8%AF%86%E7%82%B9%E6%A6%82%E8%A7%88%EF%BC%9A"><span class="toc-number">1.</span> <span class="toc-text">
+          Java知识点概览：</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#Java%E7%9A%84%E6%A6%82%E5%BF%B5%E5%92%8C%E7%89%B9%E7%82%B9%EF%BC%9A"><span class="toc-number">1.1.</span> <span class="toc-text">
+          Java的概念和特点：</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%A6%82%E5%BF%B5"><span class="toc-number">1.1.1.</span> <span class="toc-text">
+          概念</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%89%B9%E7%82%B9"><span class="toc-number">1.1.2.</span> <span class="toc-text">
+          特点</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Java%E7%9A%84JVM%E3%80%81JRE%E3%80%81JDK"><span class="toc-number">1.1.3.</span> <span class="toc-text">
+          Java的JVM、JRE、JDK</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Java%E5%9F%BA%E6%9C%AC%E8%AF%AD%E6%B3%95"><span class="toc-number">1.2.</span> <span class="toc-text">
+          Java基本语法</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B"><span class="toc-number">1.2.1.</span> <span class="toc-text">
+          数据类型</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%9F%BA%E6%9C%AC%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B%EF%BC%9A"><span class="toc-number">1.2.1.1.</span> <span class="toc-text">
+          基本数据类型：</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%BC%95%E7%94%A8%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B%EF%BC%9A"><span class="toc-number">1.2.1.2.</span> <span class="toc-text">
+          引用数据类型：</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%A8%8B%E5%BA%8F%E7%BB%93%E6%9E%84"><span class="toc-number">1.2.2.</span> <span class="toc-text">
+          程序结构</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%88%86%E6%94%AF"><span class="toc-number">1.2.2.1.</span> <span class="toc-text">
+          分支</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%BE%AA%E7%8E%AF"><span class="toc-number">1.2.2.2.</span> <span class="toc-text">
+          循环</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%95%B0%E6%8D%AE%E7%9A%84%E8%BE%93%E5%85%A5%E4%B8%8E%E8%BE%93%E5%87%BA"><span class="toc-number">1.2.3.</span> <span class="toc-text">
+          数据的输入与输出</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%95%B0%E6%8D%AE%E8%BE%93%E5%85%A5"><span class="toc-number">1.2.3.1.</span> <span class="toc-text">
+          数据输入</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%95%B0%E6%8D%AE%E8%BE%93%E5%87%BA"><span class="toc-number">1.2.3.2.</span> <span class="toc-text">
+          数据输出</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Java%E7%9A%84%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1"><span class="toc-number">1.3.</span> <span class="toc-text">
+          Java的面向对象</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%AE%80%E4%BB%8B"><span class="toc-number">1.3.1.</span> <span class="toc-text">
+          简介</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1%E6%80%9D%E6%83%B3"><span class="toc-number">1.3.2.</span> <span class="toc-text">
+          面向对象思想</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%B0%81%E8%A3%85"><span class="toc-number">1.3.2.1.</span> <span class="toc-text">
+          封装</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E7%BB%A7%E6%89%BF"><span class="toc-number">1.3.2.2.</span> <span class="toc-text">
+          继承</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%A4%9A%E6%80%81"><span class="toc-number">1.3.2.3.</span> <span class="toc-text">
+          多态</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%B1%BB%E4%B8%AD%E7%9A%84%E6%88%90%E5%91%98"><span class="toc-number">1.3.3.</span> <span class="toc-text">
+          类中的成员</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%88%90%E5%91%98%E5%8F%98%E9%87%8F"><span class="toc-number">1.3.3.1.</span> <span class="toc-text">
+          成员变量</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%88%90%E5%91%98%E6%96%B9%E6%B3%95"><span class="toc-number">1.3.3.2.</span> <span class="toc-text">
+          成员方法</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E9%9D%99%E6%80%81%E5%8F%98%E9%87%8F"><span class="toc-number">1.3.3.3.</span> <span class="toc-text">
+          静态变量</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E9%9D%99%E6%80%81%E6%96%B9%E6%B3%95"><span class="toc-number">1.3.3.4.</span> <span class="toc-text">
+          静态方法</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E9%9D%99%E6%80%81%E4%BB%A3%E7%A0%81%E5%9D%97"><span class="toc-number">1.3.3.5.</span> <span class="toc-text">
+          静态代码块</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%9E%84%E9%80%A0%E6%96%B9%E6%B3%95%E5%92%8C%E5%AF%B9%E8%B1%A1%E7%9A%84%E5%88%9D%E5%A7%8B%E5%8C%96"><span class="toc-number">1.3.4.</span> <span class="toc-text">
+          构造方法和对象的初始化</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%9E%84%E9%80%A0%E6%96%B9%E6%B3%95"><span class="toc-number">1.3.4.1.</span> <span class="toc-text">
+          构造方法</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%AF%B9%E8%B1%A1%E7%9A%84%E5%88%9D%E5%A7%8B%E5%8C%96"><span class="toc-number">1.3.4.2.</span> <span class="toc-text">
+          对象的初始化</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Java%E5%B8%B8%E7%94%A8%E7%B1%BB"><span class="toc-number">1.4.</span> <span class="toc-text">
+          Java常用类</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%AD%97%E7%AC%A6%E4%B8%B2%E7%B1%BB"><span class="toc-number">1.4.1.</span> <span class="toc-text">
+          字符串类</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#String"><span class="toc-number">1.4.1.1.</span> <span class="toc-text">
+          String</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#StringBuilder"><span class="toc-number">1.4.1.2.</span> <span class="toc-text">
+          StringBuilder</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#StringBuffer"><span class="toc-number">1.4.1.3.</span> <span class="toc-text">
+          StringBuffer</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%97%A5%E6%9C%9F%E7%B1%BB"><span class="toc-number">1.4.2.</span> <span class="toc-text">
+          日期类</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#Date%E7%B1%BB"><span class="toc-number">1.4.2.1.</span> <span class="toc-text">
+          Date类</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Calendar%E7%B1%BB"><span class="toc-number">1.4.2.2.</span> <span class="toc-text">
+          Calendar类</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E9%9B%86%E5%90%88%E7%B1%BB"><span class="toc-number">1.4.3.</span> <span class="toc-text">
+          集合类</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#List%E6%8E%A5%E5%8F%A3%E7%9A%84%E9%9B%86%E5%90%88"><span class="toc-number">1.4.3.1.</span> <span class="toc-text">
+          List接口的集合</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#ArrayList"><span class="toc-number">1.4.3.1.1.</span> <span class="toc-text">
+          ArrayList</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#LinkedList"><span class="toc-number">1.4.3.1.2.</span> <span class="toc-text">
+          LinkedList</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#Vector"><span class="toc-number">1.4.3.1.3.</span> <span class="toc-text">
+          Vector</span></a></li></ol></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Set%E6%8E%A5%E5%8F%A3%E7%9A%84%E9%9B%86%E5%90%88"><span class="toc-number">1.4.3.2.</span> <span class="toc-text">
+          Set接口的集合</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#HashSet"><span class="toc-number">1.4.3.2.1.</span> <span class="toc-text">
+          HashSet</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#LinkedHashSet"><span class="toc-number">1.4.3.2.2.</span> <span class="toc-text">
+          LinkedHashSet</span></a></li></ol></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Map-lt-K-V-gt-%E6%8E%A5%E5%8F%A3%E7%9A%84%E9%9B%86%E5%90%88"><span class="toc-number">1.4.3.3.</span> <span class="toc-text">
+          Map&lt;K,V&gt;接口的集合</span></a></li></ol></li></ol></li></ol></li></ol></section><!-- ov = overview--><section class="sidebar-ov hide"><div class="sidebar-ov-author"><div class="sidebar-ov-author__avatar"><img class="sidebar-ov-author__avatar_img" src="/images/icons/head.jpg" alt="avatar"></div><p class="sidebar-ov-author__text">taoyyz</p></div><div class="sidebar-ov-social"><a class="sidebar-ov-social-item" href="https://weibo.com/SBTTGP/" target="_blank" rel="noopener" data-popover="微博：taoyyz" data-popover-pos="up"><span class="sidebar-ov-social-item__icon"><i class="fab fa-weibo"></i></span></a><a class="sidebar-ov-social-item" href="https://www.zhihu.com/people/taoyyz" target="_blank" rel="noopener" data-popover="知乎：taoyyz" data-popover-pos="up"><span class="sidebar-ov-social-item__icon">知</span></a><a class="sidebar-ov-social-item" href="https://space.bilibili.com/10111280" target="_blank" rel="noopener" data-popover="哔哩哔哩：宝贝球球ouo" data-popover-pos="up"><span class="sidebar-ov-social-item__icon"><i class="fas fa-tv"></i></span></a><a class="sidebar-ov-social-item" href="angelahape" target="_blank" rel="noopener" data-popover="微信：angelahape" data-popover-pos="up"><span class="sidebar-ov-social-item__icon"><i class="fab fa-weixin"></i></span></a><a class="sidebar-ov-social-item" href="tencent://message?uin=2655026691" target="_blank" rel="noopener" data-popover="QQ：2655026691" data-popover-pos="up"><span class="sidebar-ov-social-item__icon"><i class="fab fa-qq"></i></span></a><a class="sidebar-ov-social-item" href="https://www.youtube.com/channel/UCsz2-9ReY8ayMd-92rEGKFQ" target="_blank" rel="noopener" data-popover="Youtube：Xiaotao" data-popover-pos="up"><span class="sidebar-ov-social-item__icon"><i class="fab fa-youtube"></i></span></a></div><div class="sidebar-ov-state"><a class="sidebar-ov-state-item sidebar-ov-state-item--posts" href="/archives/"><div class="sidebar-ov-state-item__count">8</div><div class="sidebar-ov-state-item__name">归档</div></a><a class="sidebar-ov-state-item sidebar-ov-state-item--categories" href="/categories/"><div class="sidebar-ov-state-item__count">3</div><div class="sidebar-ov-state-item__name">分类</div></a><a class="sidebar-ov-state-item sidebar-ov-state-item--tags" href="/tags/"><div class="sidebar-ov-state-item__count">3</div><div class="sidebar-ov-state-item__name">标签</div></a></div><div></div><div id="tishi" style="text-align:center;user-select:none;font-weight:600;">本站已运行</div><span id="sitetime" style="text-align:center;display:block;user-select:none;">载入天数...<script language="javascript">function siteTime(){
+window.setTimeout("siteTime()", 1000);
+var seconds = 1000;
+var minutes = seconds * 60;
+var hours = minutes * 60;
+var days = hours * 24;
+var years = days * 365;
+var today = new Date();
+var todayYear = today.getFullYear();
+var todayMonth = today.getMonth()+1;
+var todayDate = today.getDate();
+var todayHour = today.getHours();
+var todayMinute = today.getMinutes();
+var todaySecond = today.getSeconds();
+var t1 = Date.UTC(2021,03,10,23,00,00); //北京时间
+var t2 = Date.UTC(todayYear,todayMonth,todayDate,todayHour,todayMinute,todaySecond);
+var diff = t2-t1;
+var diffYears = Math.floor(diff/years);
+var diffDays = Math.floor((diff/days)-diffYears*365);
+var diffHours = Math.floor((diff-(diffYears*365+diffDays)*days)/hours);
+var diffMinutes = Math.floor((diff-(diffYears*365+diffDays)*days-diffHours*hours)/minutes);
+var diffSeconds = Math.floor((diff-(diffYears*365+diffDays)*days-diffHours*hours-diffMinutes*minutes)/seconds);
+document.getElementById("sitetime").innerHTML=/*diffYears+" 年 "+*/diffDays+" 天 "+diffHours+" 小时 "+diffMinutes+" 分钟 "+diffSeconds+" 秒";
+}/*建站时间还没有一年，就将之注释掉了。需要的可以取消*/
+siteTime();
+</script></span></section><div class="sidebar-reading"><div class="sidebar-reading-info"><span class="sidebar-reading-info__text">你已阅读了 </span><span class="sidebar-reading-info__num">0</span><span class="sidebar-reading-info__perc">%</span></div><div class="sidebar-reading-line"></div></div></aside></div><div class="clearfix"></div></div></main><footer class="footer" id="footer"><div class="footer-inner"><div><span>Copyright © 2021</span><span class="footer__icon"><i class="fas fa-heart"></i></span><span>taoyyz小陶</span></div><div>基于Hexo-stun，taoyyz所有</div></div></footer><div class="loading-bar" id="loading-bar"><div class="loading-bar__progress"></div></div><div class="back2top" id="back2top"><span class="back2top__icon"><i class="fas fa-rocket"></i></span></div></div><div class="search-mask"></div><div class="search-popup"><span class="search-close"></span><div class="search-input"><input placeholder="搜索文章（支持多关键词，请用空格分隔）"></div><div class="search-results"></div></div><script src="https://cdn.jsdelivr.net/npm/jquery@v3.4.1/dist/jquery.min.js"></script><script src="https://cdn.jsdelivr.net/npm/velocity-animate@1.5.2/velocity.min.js"></script><script src="https://cdn.jsdelivr.net/npm/velocity-animate@1.5.2/velocity.ui.min.js"></script><script src="https://cdn.jsdelivr.net/npm/lazyload@2.0.0-rc.2/lazyload.min.js"></script><script>function initSearch() {
+  var isXML = true;
+  var search_path = 'search.json';
+
+  if (!search_path) {
+    search_path = 'search.xml';
+  } else if (/json$/i.test(search_path)) {
+    isXML = false;
+  }
+
+  var path = '/' + search_path;
+  $.ajax({
+    url: path,
+    dataType: isXML ? 'xml' : 'json',
+    async: true,
+    success: function (res) {
+      var datas = isXML ? $('entry', res).map(function () {
+        // 将 XML 转为 JSON
+        return {
+          title: $('title', this).text(),
+          content: $('content', this).text(),
+          url: $('url', this).text()
+        };
+      }).get() : res;
+      var $input = $('.search-input input');
+      var $result = $('.search-results');
+      // 搜索对象（标题、内容）的权重，影响显示顺序
+      var WEIGHT = { title: 100, content: 1 };
+      var searchPost = function () {
+        var searchText = $input.val().toLowerCase().trim();
+        // 根据空白字符分隔关键字
+        var keywords = searchText.split(/[\s]+/);
+        // 搜索结果
+        var matchPosts = [];
+
+        // 有多个关键字时，将原文字整个保存下来
+        if (keywords.length > 1) {
+          keywords.push(searchText);
+        }
+        // 防止未输入字符时搜索
+        if (searchText.length > 0) {
+          datas.forEach(function (data) {
+            var isMatch  = false;
+            // 没有标题的文章使用预设的 i18n 变量代替
+            var title = (data.title && data.title.trim()) || '[ 文章无标题 ]';
+            var titleLower = title && title.toLowerCase();
+            // 删除 HTML 标签 和 所有空白字符
+            var content = data.content && data.content.replace(/<[^>]+>/g, '');
+            var contentLower = content && content.toLowerCase();
+            // 删除重复的 /
+            var postURL = data.url && decodeURI(data.url).replace(/\/{2,}/g, '/');
+            // 标题中匹配到的关键词
+            var titleHitSlice = [];
+            // 内容中匹配到的关键词
+            var contentHitSlice = [];
+
+            keywords.forEach(function (keyword) {
+              /**
+              * 获取匹配的关键词的索引
+              * @param {String} keyword 要匹配的关键字
+              * @param {String} text 原文字
+              * @param {Boolean} caseSensitive 是否区分大小写
+              * @param {Number} weight 匹配对象的权重。权重大的优先显示
+              * @return {Array}
+              */
+              function getIndexByword (word, text, caseSensitive, weight) {
+                if (!word || !text) {
+                  return [];
+                };
+
+                var startIndex = 0; // 每次匹配的开始索引
+                var index = -1;     // 匹配到的索引值
+                var result = [];    // 匹配结果
+
+                if (!caseSensitive) {
+                  word = word.toLowerCase();
+                  text = text.toLowerCase();
+                }
+
+                while((index = text.indexOf(word, startIndex)) !== -1) {
+                  var hasMatch = false;
+                  // 索引位置相同的关键词，保留长度较长的
+                  titleHitSlice.forEach(function (hit) {
+                    if (hit.index === index && hit.word.length < word.length) {
+                      hit.word = word;
+                      hasMatch = true;
+                    }
+                  });
+                  startIndex = index + word.length;
+                  !hasMatch && result.push({ index: index, word: word, weight: weight });
+                }
+                return result;
+              }
+              titleHitSlice = titleHitSlice.concat(getIndexByword(keyword, titleLower, false, WEIGHT.title));
+              contentHitSlice = contentHitSlice.concat(getIndexByword(keyword, contentLower, false, WEIGHT.content));
+            });
+
+            var hitTitle = titleHitSlice.length;
+            var hitContent = contentHitSlice.length;
+
+            if (hitTitle > 0 || hitContent > 0) {
+              isMatch = true;
+            }
+            if (isMatch) {
+              ;[titleHitSlice, contentHitSlice].forEach(function (hit) {
+                // 按照匹配文字的索引的递增顺序排序
+                hit.sort(function (left, right) {
+                  return left.index - right.index;
+                });
+              });
+              /**
+              * 给文本中匹配到的关键词添加标记，从而进行高亮显示
+              * @param {String} text 原文本
+              * @param {Array} hitSlice 匹配项的索引信息
+              * @param {Number} start 开始索引
+              * @param {Number} end 结束索引
+              * @return {String}
+              */
+              function highlightKeyword (text, hitSlice, start, end) {
+                if (!text || !hitSlice || !hitSlice.length) {
+                  return;
+                }
+
+                var result = '';
+                var startIndex = start;
+                var endIndex = end;
+                hitSlice.forEach(function (hit) {
+                  if (hit.index < startIndex) {
+                    return;
+                  }
+
+                  var hitWordEnd = hit.index + hit.word.length;
+                  result += text.slice(startIndex, hit.index);
+                  result += '<b>' + text.slice(hit.index, hitWordEnd) + '</b>';
+                  startIndex = hitWordEnd;
+                });
+                result += text.slice(startIndex, endIndex);
+                return result;
+              }
+
+              var postData = {};
+              // 文章总的搜索权重
+              var postWeight = titleHitSlice.length * WEIGHT.title + contentHitSlice.length * WEIGHT.content;
+              // 标记匹配关键词后的标题
+              var postTitle = highlightKeyword(title, titleHitSlice, 0, title.length) || title;
+              // 标记匹配关键词后的内容
+              var postContent;
+              // 显示内容的长度
+              var SHOW_WORD_LENGTH = 200;
+              // 命中关键词前的字符显示长度
+              var SHOW_WORD_FRONT_LENGTH = 20;
+              var SHOW_WORD_END_LENGTH = SHOW_WORD_LENGTH - SHOW_WORD_FRONT_LENGTH;
+
+              // 截取匹配的第一个字符，前后共 200 个字符来显示
+              if (contentHitSlice.length > 0) {
+                var firstIndex = contentHitSlice[0].index;
+                var start = firstIndex > SHOW_WORD_FRONT_LENGTH ? firstIndex - SHOW_WORD_FRONT_LENGTH : 0;
+                var end = firstIndex + SHOW_WORD_END_LENGTH;
+                postContent = highlightKeyword(content, contentHitSlice, start, end);
+              } else { // 未匹配到内容，直接截取前 200 个字符来显示
+                postContent = content.slice(0, SHOW_WORD_LENGTH);
+              }
+              postData.title = postTitle;
+              postData.content = postContent;
+              postData.url = postURL;
+              postData.weight = postWeight;
+              matchPosts.push(postData);
+            }
+          });
+        }
+
+        var resultInnerHtml = '';
+        if (matchPosts.length) {
+          // 按权重递增的顺序排序，使权重大的优先显示
+          matchPosts.sort(function (left, right) {
+            return right.weight - left.weight;
+          });
+          resultInnerHtml += '<ul>';
+          matchPosts.forEach(function (post) {
+            resultInnerHtml += '<li><a class="search-results-title" href="' + post.url + '">';
+            resultInnerHtml += post.title;
+            resultInnerHtml += '</a><div class="search-results-content">';
+            resultInnerHtml += post.content;
+            resultInnerHtml += '</div></li>';
+          });
+          resultInnerHtml += '</ul>';
+        } else {
+          resultInnerHtml += '<div class="search-results-none"><i class="far fa-meh"></i></div>';
+        }
+        $result.html(resultInnerHtml);
+      };
+      $input.on('input', searchPost);
+      $input.on('keyup', function (e) {
+        if (e.keyCode === Stun.utils.codeToKeyCode('Enter')) {
+          searchPost();
+        }
+      });
+    }
+  });
+}
+
+function closeSearch () {
+  $('body').css({ overflow: 'auto' });
+  $('.search-popup').css({ display: 'none' });
+  $('.search-mask').css({ display: 'none' });
+}
+
+window.addEventListener('DOMContentLoaded', function () {
+  Stun.utils.pjaxReloadLocalSearch = function () {
+    $('.header-nav-search').on('click', function (e) {
+      e.stopPropagation();
+      $('body').css('overflow', 'hidden');
+      $('.search-popup')
+        .velocity('stop')
+        .velocity('transition.expandIn', {
+          duration: 300,
+          complete: function () {
+            $('.search-popup input').focus();
+          }
+        });
+      $('.search-mask')
+        .velocity('stop')
+        .velocity('transition.fadeIn', {
+          duration: 300
+        });
+
+      initSearch();
+    });
+    $('.search-mask, .search-close').on('click', function () {
+      closeSearch();
+    });
+    $(document).on('keydown', function (e) {
+      // Escape <=> 27
+      if (e.keyCode === Stun.utils.codeToKeyCode('Escape')) {
+        closeSearch();
+      }
+    });
+  };
+
+  Stun.utils.pjaxReloadLocalSearch();
+}, false);
+
+function safeOpenUrl(url) {
+  var newTab = window.open();
+  newTab.opener = null;
+  newTab.location = url;
+}
+
+function extSearch(engine) {
+  var engines = {
+    google: 'https://www.google.com/search?q=',
+    bing: 'https://cn.bing.com/search?q=',
+    baidu: 'https://www.baidu.com/s?ie=UTF-8&wd=',
+  };
+  var host = window.location.host;
+  var query = $('.search-input input').val().toLowerCase().trim();
+  var uri = engines[engine] + query + ' site:' + host;
+
+  if (query) {
+    safeOpenUrl(uri);
+  } else {
+    Stun.utils.popAlert('warning', '请输入字符');
+  }
+}
+
+var assistSearchList = window.CONFIG.assistSearch;
+
+if (Array.isArray(assistSearchList)) {
+  assistSearchList.forEach(function (name) {
+    document.querySelector('.search-btns-item--' + name).addEventListener('click', function () {
+      extSearch(name);
+    }, false);
+  });
+}</script><script src="https://cdn.jsdelivr.net/npm/pjax@latest/pjax.min.js"></script><script>window.addEventListener('DOMContentLoaded', function () {
+  var pjax = new Pjax({"selectors":["head title","#main",".pjax-reload"],"history":true,"scrollTo":false,"scrollRestoration":false,"cacheBust":false,"debug":false,"currentUrlFullReload":false,"timeout":0});
+  // 加载进度条的计时器
+  var loadingTimer = null;
+
+  // 重置页面 Y 方向上的滚动偏移量
+  document.addEventListener('pjax:send', function () {
+    $('.header-nav-menu').removeClass('show');
+    if (CONFIG.pjax && CONFIG.pjax.avoidBanner) {
+      $('html').velocity('scroll', {
+        duration: 500,
+        offset: $('#header').height(),
+        easing: 'easeInOutCubic'
+      });
+    }
+
+    var loadingBarWidth = 20;
+    var MAX_LOADING_WIDTH = 95;
+
+    $('.loading-bar').addClass('loading');
+    $('.loading-bar__progress').css('width', loadingBarWidth + '%');
+    clearInterval(loadingTimer);
+    loadingTimer = setInterval(function () {
+      loadingBarWidth += 3;
+      if (loadingBarWidth > MAX_LOADING_WIDTH) {
+        loadingBarWidth = MAX_LOADING_WIDTH;
+      }
+      $('.loading-bar__progress').css('width', loadingBarWidth + '%');
+    }, 500);
+  }, false);
+
+  window.addEventListener('pjax:complete', function () {
+    clearInterval(loadingTimer);
+    $('.loading-bar__progress').css('width', '100%');
+    $('.loading-bar').removeClass('loading');
+    setTimeout(function () {
+      $('.loading-bar__progress').css('width', '0');
+    }, 400);
+    $('link[rel=prefetch], script[data-pjax-rm]').each(function () {
+      $(this).remove();
+    });
+    $('script[data-pjax], #pjax-reload script').each(function () {
+      $(this).parent().append($(this).remove());
+    });
+
+    if (Stun.utils.pjaxReloadBoot) {
+      Stun.utils.pjaxReloadBoot();
+    }
+    if (Stun.utils.pjaxReloadScroll) {
+      Stun.utils.pjaxReloadScroll();
+    }
+    if (Stun.utils.pjaxReloadSidebar) {
+      Stun.utils.pjaxReloadSidebar();
+    }
+    if (false) {
+      if (Stun.utils.pjaxReloadHeader) {
+        Stun.utils.pjaxReloadHeader();
+      }
+      if (Stun.utils.pjaxReloadScrollIcon) {
+        Stun.utils.pjaxReloadScrollIcon();
+      }
+      if (Stun.utils.pjaxReloadLocalSearch) {
+        Stun.utils.pjaxReloadLocalSearch();
+      }
+    }
+  }, false);
+}, false);</script><div id="pjax-reload"></div><script src="/js/utils.js?v=2.6.2"></script><script src="/js/stun-boot.js?v=2.6.2"></script><script src="/js/scroll.js?v=2.6.2"></script><script src="/js/header.js?v=2.6.2"></script><script src="/js/sidebar.js?v=2.6.2"></script><script type="application/json" src="/search.json"></script></body></html>
